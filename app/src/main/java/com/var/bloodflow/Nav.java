@@ -1,6 +1,5 @@
 package com.var.bloodflow;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -8,14 +7,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.var.bloodflow.fragments.HistoryFragment;
 import com.var.bloodflow.fragments.HomeFragment;
 import com.var.bloodflow.fragments.ProfileFragment;
 import com.var.bloodflow.fragments.RequestsFragment;
 
 public class Nav extends AppCompatActivity {
+
+    FirebaseAuth fAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,37 +28,70 @@ public class Nav extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.nav_home, new HomeFragment()).commit();
         setUpLandingFragment();
+
+//        fAuth = FirebaseAuth.getInstance();
+
     }
+//    private void checkUserStatus(){
+//        FirebaseUser user = fAuth.getCurrentUser();
+//        if (user != null)
+//        {
+//
+//        }
+//        else{
+//            startActivity(new Intent(Launch.this,Login.class));
+//        }
+//
+//    }
+//
+//    @Override
+//    protected void onStart() {
+//        checkUserStatus();
+//        super.onStart();
+//    }
 
     private void setUpLandingFragment(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack();
-        fragmentManager.beginTransaction()
-                .add(R.id.nav_home, new HomeFragment()).commit();
+
+        HomeFragment fragment1 = new HomeFragment();
+        FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
+        ft1.replace(R.id.fragment_container,fragment1,"");
+        ft1.commit();
     }
 
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @SuppressLint("NonConstantResourceId")
+    private final BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectedFragment = new HomeFragment();
+            Fragment selectedFragment = null;
             switch (item.getItemId()){
                 case R.id.nav_home :
-                    selectedFragment = new HomeFragment();
-                    break;
+                    HomeFragment fragment1 = new HomeFragment();
+                    FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
+                    ft1.replace(R.id.fragment_container,fragment1,"");
+                    ft1.commit();
+                    return true;
                 case R.id.nav_request :
-                    selectedFragment = new RequestsFragment();
-                    break;
+                    RequestsFragment fragment2 = new RequestsFragment();
+                    FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
+                    ft2.replace(R.id.fragment_container,fragment2,"");
+                    ft2.commit();
+                    return true;
                 case R.id.nav_history :
-                    selectedFragment = new HistoryFragment();
-                    break;
+                    HistoryFragment fragment3 = new HistoryFragment();
+                    FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
+                    ft3.replace(R.id.fragment_container,fragment3,"");
+                    ft3.commit();
+                    return true;
                 case R.id.nav_profile :
-                    selectedFragment = new ProfileFragment();
-                    break;
+                    ProfileFragment fragment4 = new ProfileFragment();
+                    FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
+                    ft4.replace(R.id.fragment_container,fragment4,"");
+                    ft4.commit();
+                    return true;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
-            return true;
+            return false;
         }
     };
 }

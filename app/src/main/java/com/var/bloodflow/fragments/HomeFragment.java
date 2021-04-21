@@ -1,5 +1,7 @@
 package com.var.bloodflow.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +16,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.var.bloodflow.R;
 
-//import com.google.android.gms.location.places.Place;
-//import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener {
     int key=0;
@@ -76,42 +81,44 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
                         Toast.makeText(getActivity(), "Choose Value", Toast.LENGTH_SHORT).show();
                     }
                 });
-//        maps = view.findViewById(R.id.maps);
-//        txt = view.findViewById(R.id.txt);
-//        maps.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-//                    try {
-//                        startActivityForResult(builder.build(getActivity()),PLACE_PICKER_REQUEST);
-//                    } catch (GooglePlayServicesRepairableException e) {
-//                        e.printStackTrace();
-//                    } catch (GooglePlayServicesNotAvailableException e) {
-//                        e.printStackTrace();
-//                    }
-//            }
-//        });
+        maps = view.findViewById(R.id.maps);
+        txt = view.findViewById(R.id.txt);
+        maps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                        try {
+                            startActivityForResult(builder.build(getActivity()),PLACE_PICKER_REQUEST);
+
+                        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+                            e.printStackTrace();
+                        }
+
+            }
+        });
         return view;
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        if (requestCode == PLACE_PICKER_REQUEST){
-//            if (resultCode == Activity.RESULT_OK){
-//                Place place = PlacePicker.getPlace(data,getActivity());
-//                StringBuilder stringBuilder = new StringBuilder();
-//                String latitude = String.valueOf(place.getLatLng().latitude);
-//                String longitude = String.valueOf(place.getLatLng().longitude);
-//                stringBuilder.append("LATITUDE :");
-//                stringBuilder.append(latitude);
-//                stringBuilder.append("\n");
-//                stringBuilder.append("LONGITUDE :");
-//                stringBuilder.append(longitude);
-//                txt.setText(stringBuilder.toString());
-//
-//            }
-//        }
-//    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST){
+            if (resultCode == Activity.RESULT_OK){
+                Place place = PlacePicker.getPlace(data,getActivity());
+                StringBuilder stringBuilder = new StringBuilder();
+                String latitude = String.valueOf(place.getLatLng().latitude);
+                String longitude = String.valueOf(place.getLatLng().longitude);
+                stringBuilder.append("LATITUDE :");
+                stringBuilder.append(latitude);
+                stringBuilder.append("\n");
+                stringBuilder.append("LONGITUDE :");
+                stringBuilder.append(longitude);
+                txt.setText(stringBuilder.toString());
+            }
+        }
+    }
+
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

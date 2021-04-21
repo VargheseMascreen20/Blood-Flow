@@ -1,21 +1,29 @@
 package com.var.bloodflow.fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.var.bloodflow.Login;
 import com.var.bloodflow.R;
+import com.var.bloodflow.Register;
+
+import java.util.Objects;
 
 public class ProfileFragment extends PreferenceFragmentCompat {
     private Preference report, profile, delete, logout;
-    private String name;
+    private String name,phone;
     private int id;
+    FirebaseAuth firebaseAuth;
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
@@ -27,6 +35,8 @@ public class ProfileFragment extends PreferenceFragmentCompat {
         SharedPreferences sp = getContext().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
         id=sp.getInt("User ID", 0);
         name=sp.getString("Name", "");
+        phone=sp.getString("Phone Number", "");
+        SharedPreferences.Editor editor = sp.edit();
         profile.setTitle(name);
         report.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
@@ -49,45 +59,44 @@ public class ProfileFragment extends PreferenceFragmentCompat {
         delete.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-//                .child(FirebaseAuth.getInstance().currentUser.uid).remove().addOnSuccessListener{
-//                    FirebaseAuth.getInstance().currentUser
-//                }!!.delete().addOnCompleteListener{
-                    //Go to login screen } }
-
 
                                 Intent intent = new Intent(getContext(), com.var.bloodflow.Login.class);
                                  startActivity(intent);
-//                Call<void> call = restApiInterface.deleteUser(id);
-//                call.enqueue(new Callback<void>() {
-//                    @Override
-//                    public void onResponse(@NonNull Call<void> call, @NonNull Response<void> response) {
-//                        ArrayList<ProductsItem> products = response.body().get(1).getItems();
-//                        mAdapter = new ProductsAdapter(products, getContext());
-//                        Log.d("TAG", "Reached Here3");
-//                        mRecyclerView.setAdapter(mAdapter);
-//                        Log.d("Tag", String.valueOf(response.body()));
-//                        Toast.makeText(getContext(), "First Page Loading", Toast.LENGTH_SHORT).show();
-//                        progressBar.setVisibility(View.GONE);
-//                    }
-//                    @Override
-//                    public void onFailure(Call<void> call, Throwable t) {
-//                        Toast.makeText(getContext(), "Cannot Access Server", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+
                 return false;
             }
         });
         logout.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getContext(), com.var.bloodflow.Login.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Log Out");
+                builder.setMessage("Are you Sure to Log Out?");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseAuth.getInstance().signOut();
+
+                        editor.remove("phone");
+                        editor.putInt("Log in Status", 1);
+                        editor.apply();
+                        Intent intent = new Intent(getContext(), Login.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
 
                 return false;
             }
         });
-
     }
 }
 

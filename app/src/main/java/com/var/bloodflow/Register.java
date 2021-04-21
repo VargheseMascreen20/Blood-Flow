@@ -1,5 +1,7 @@
 package com.var.bloodflow;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -7,7 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,20 +27,38 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.var.bloodflow.ModelClasses.Users;
+import com.var.bloodflow.Utils.FirebaseMethods;
+
+import java.text.MessageFormat;
+import java.util.Calendar;
 
 public class Register extends AppCompatActivity {
-    EditText email, pass, phno, bldgrp,dob,gender,name;
+
     public static final String TAG = "TAG";
+
+    EditText email, pass, phno, bldgrp,dob,gender,name;
     Button register,bck;
-    FirebaseAuth fAuth;
     String userID;
-    FirebaseFirestore fStore;
+
+    ImageView cal;
+    private int mDate,mMonth,mYear;
+
+    private Context mContext;
+    private FirebaseAuth fAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseMethods firebaseMethods;
+    private FirebaseDatabase mFirebaseDatabase;
     DatabaseReference reference;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        firebaseMethods = new FirebaseMethods(mContext);
+
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
         phno = findViewById(R.id.phno);
@@ -46,13 +68,29 @@ public class Register extends AppCompatActivity {
         bldgrp = findViewById(R.id.bldGrp);
         bck = findViewById(R.id.bck);
         fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
-
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(com.var.bloodflow.Register.this, com.var.bloodflow.Login.class));
+            startActivity(new Intent(Register.this,Login.class));
             finish();
         }
+        cal =findViewById(R.id.date_picker);
+        cal.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                final Calendar cal = Calendar.getInstance();
+                mDate = cal.get(Calendar.DATE);
+                mMonth = cal.get(Calendar.MONTH);
+                mYear = cal.get(Calendar.YEAR);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Register.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        dob.setText(MessageFormat.format("{0}-{1}-{2}", date, month, year));
+                    }
+                }, mYear,mMonth,mDate);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
+                datePickerDialog.show();
+            }
+        });
         register = (Button)findViewById(R.id.register1);
         register.setOnClickListener(new OnClickListener(){
             @Override
@@ -114,12 +152,13 @@ public class Register extends AppCompatActivity {
                                     }
                                 });
                               */
+
                                 Users users=new Users(fname,emailid,dateOB,phoneno,bloodgrp,gend,password);
                                 reference.child(phoneno).setValue(users);
                                 Toast.makeText(com.var.bloodflow.Register.this, "User Created.", Toast.LENGTH_SHORT).show();
 
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
+                                finish();
                             } else {
                                 Toast.makeText(com.var.bloodflow.Register.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
