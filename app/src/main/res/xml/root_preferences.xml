@@ -7,8 +7,8 @@
             android:icon="@drawable/acc">
             <intent
                 android:id="@+id/change_profile_intent"
-                android:targetClass="com.example.recycle.SubActivity.ChangeProfile"
-                android:targetPackage="com.example.recycle" />
+                android:targetClass="com.var.bloodflow.fragments.SettingsFragment.class"
+                android:targetPackage="com.var.bloodflow.fragments" />
         </Preference>
     </PreferenceCategory>
 

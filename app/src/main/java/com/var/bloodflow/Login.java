@@ -30,20 +30,25 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.var.bloodflow.ModelClasses.Users;
 
 public class Login extends AppCompatActivity {
 
+    private static final int RC_SIGN_IN = 100;
     EditText mEmail, mPassword;
     Button mLoginBtn;
     TextView mCreateBtn, forgotTextLink;
     ProgressBar progressBar;
-
+    String userID;
     FirebaseAuth fAuth;
     SignInButton mGoogleLoginBtn;
-    private FirebaseAuth.AuthStateListener fAuthListener;
+    DatabaseReference reference;
+
 
     GoogleSignInClient mGoogleSignInClient;
-    private static final int RC_SIGN_IN = 100;
+    private FirebaseAuth.AuthStateListener fAuthListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +72,7 @@ public class Login extends AppCompatActivity {
         forgotTextLink = findViewById(R.id.forgotPassword);
 
         fAuth = FirebaseAuth.getInstance();
-
+        reference = FirebaseDatabase.getInstance().getReference("users");
         setupFirebaseAuth();
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -199,9 +204,24 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
 
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                            if (task.getResult().getAdditionalUserInfo().isNewUser()) {
+
+                                Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                final String userid = user.getUid();
+                                final String fname = user.getDisplayName();
+                                final String emailid = user.getEmail();
+                                final String phoneno = user.getPhoneNumber();
+                                final String dateOB = "";
+                                final String gend = "";
+                                final String bloodgrp = "";
+                                final String password = "";
+                                final String image = "";
+                                Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image);
+                                reference.child(userid).setValue(users);
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(Login.this, "Login Failed...", Toast.LENGTH_SHORT).show();
@@ -229,6 +249,7 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "User is signed in", Toast.LENGTH_SHORT).show();
                     Intent home = new Intent(Login.this, Nav.class);
                     startActivity(home);
+                    finish();
 
 
                 } else {

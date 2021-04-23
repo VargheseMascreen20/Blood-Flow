@@ -1,23 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout3"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F1EDED">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="126dp"
-        android:layout_height="52dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="52dp"
-        android:fontFamily="sans-serif"
-        android:text="Profile"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="218dp"
+            android:background="@color/red">
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="110dp"
+            android:layout_marginEnd="0dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_margin="25dp"
+                android:background="@color/light_grey"
+                android:padding="5dp"
+                android:src="@drawable/ic_add_image">
+
+            </ImageView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp">
+
+                <TextView
+                    android:id="@+id/nameTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textSize="23dp"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="5dp"/>
+
+                <TextView
+                    android:id="@+id/emailTv"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/phoneTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white">
+
+                </TextView>
+
+            </LinearLayout>
+        </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_edit_white"
+         />
+
+
+
+
+
+</RelativeLayout>

@@ -26,10 +26,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.var.bloodflow.ModelClasses.Users;
-import com.var.bloodflow.Utils.FirebaseMethods;
 
+import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.util.Calendar;
 
@@ -47,7 +46,6 @@ public class Register extends AppCompatActivity {
     private Context mContext;
     private FirebaseAuth fAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseMethods firebaseMethods;
     private FirebaseDatabase mFirebaseDatabase;
     DatabaseReference reference;
 
@@ -57,7 +55,6 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        firebaseMethods = new FirebaseMethods(mContext);
 
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
@@ -102,7 +99,7 @@ public class Register extends AppCompatActivity {
                 final String dateOB =   dob.getText().toString().trim();
                 final String gend = gender.getText().toString().trim();
                 final String bloodgrp = bldgrp.getText().toString().trim();
-
+                final String image = "";
                 if (TextUtils.isEmpty(emailid)) {
                     email.setError("Email is Required");
                     return;
@@ -153,7 +150,7 @@ public class Register extends AppCompatActivity {
                                 });
                               */
 
-                                Users users=new Users(fname,emailid,dateOB,phoneno,bloodgrp,gend,password);
+                                Users users=new Users(userID,fname,emailid,dateOB,phoneno,bloodgrp,gend,password,image);
                                 reference.child(phoneno).setValue(users);
                                 Toast.makeText(com.var.bloodflow.Register.this, "User Created.", Toast.LENGTH_SHORT).show();
 

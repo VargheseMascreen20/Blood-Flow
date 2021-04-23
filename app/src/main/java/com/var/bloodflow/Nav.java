@@ -15,6 +15,13 @@ import com.var.bloodflow.fragments.HistoryFragment;
 import com.var.bloodflow.fragments.HomeFragment;
 import com.var.bloodflow.fragments.ProfileFragment;
 import com.var.bloodflow.fragments.RequestsFragment;
+import com.var.bloodflow.fragments.SettingsFragment;
+
+import static com.var.bloodflow.R.id.nav_history;
+import static com.var.bloodflow.R.id.nav_home;
+import static com.var.bloodflow.R.id.nav_profile;
+import static com.var.bloodflow.R.id.nav_request;
+import static com.var.bloodflow.R.id.nav_settings;
 
 public class Nav extends AppCompatActivity {
 
@@ -26,7 +33,7 @@ public class Nav extends AppCompatActivity {
         setContentView(R.layout.activity_nav);
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.nav_home, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(nav_home, new HomeFragment()).commit();
         setUpLandingFragment();
 
 //        fAuth = FirebaseAuth.getInstance();
@@ -66,29 +73,36 @@ public class Nav extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
             switch (item.getItemId()){
-                case R.id.nav_home :
+                case nav_home :
                     HomeFragment fragment1 = new HomeFragment();
                     FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
                     ft1.replace(R.id.fragment_container,fragment1,"");
                     ft1.commit();
                     return true;
-                case R.id.nav_request :
+                case nav_request :
                     RequestsFragment fragment2 = new RequestsFragment();
                     FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
                     ft2.replace(R.id.fragment_container,fragment2,"");
                     ft2.commit();
                     return true;
-                case R.id.nav_history :
+                case nav_history :
                     HistoryFragment fragment3 = new HistoryFragment();
                     FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
                     ft3.replace(R.id.fragment_container,fragment3,"");
                     ft3.commit();
                     return true;
-                case R.id.nav_profile :
+                case nav_profile :
                     ProfileFragment fragment4 = new ProfileFragment();
                     FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
                     ft4.replace(R.id.fragment_container,fragment4,"");
                     ft4.commit();
+                    return true;
+
+                case nav_settings :
+                    SettingsFragment fragment5 = new SettingsFragment();
+                    FragmentTransaction ft5 = getSupportFragmentManager().beginTransaction();
+                    ft5.replace(R.id.fragment_container,fragment5,"");
+                    ft5.commit();
                     return true;
             }
             return false;
