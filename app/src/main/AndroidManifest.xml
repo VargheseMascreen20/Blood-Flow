@@ -5,10 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <uses-permission android:name="android.permission.CAMERA "/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE "/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA " />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE " />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blood"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MainActivity2"/>
+        <activity android:name=".MainActivity2" />
+
         <meta-data
             android:name="com.google.gms.vision"
             android:value="@integer/google_play_services_version" />
@@ -26,10 +27,13 @@
             android:name="com.android.geo.API_KEY"
             android:value="AIzaSyCIbijViDTq6dbaZ43kd4JP5Wb58hcBtSo" />
 
-        <activity android:name=".SendOTPActivity" />
         <activity android:name=".VerifyOTPActivity" />
         <activity android:name=".Nav" />
-        <activity android:name=".Login" />
+        <activity android:name=".Login">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.var.bloodflow.Login" />
+        </activity>
         <activity android:name=".Register" />
         <activity android:name=".MainActivity">
             <intent-filter>

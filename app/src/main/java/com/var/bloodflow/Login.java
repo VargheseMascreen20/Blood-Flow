@@ -38,10 +38,11 @@ public class Login extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 100;
     EditText mEmail, mPassword;
-    Button mLoginBtn;
+    Button mLoginBtn,otpLogin;
     TextView mCreateBtn, forgotTextLink;
     ProgressBar progressBar;
     String userID;
+
     FirebaseAuth fAuth;
     SignInButton mGoogleLoginBtn;
     DatabaseReference reference;
@@ -74,6 +75,15 @@ public class Login extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
         setupFirebaseAuth();
+
+        otpLogin = (Button) findViewById(R.id.otpLogin);
+        otpLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent otp= new Intent(Login.this,VerifyOTPActivity.class);
+                startActivity(otp);
+            }
+        });
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,6 +186,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+
     }
 
     @Override
@@ -260,6 +271,13 @@ public class Login extends AppCompatActivity {
                 // ...
             }
         };
+    }
+    int counter;
+    public void onBackPressed() {
+        counter++;
+        if(counter == 1)
+            super.onBackPressed();
+        finish();
     }
 
     @Override

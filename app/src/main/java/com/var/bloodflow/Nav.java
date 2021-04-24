@@ -36,6 +36,8 @@ public class Nav extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(nav_home, new HomeFragment()).commit();
         setUpLandingFragment();
 
+
+
 //        fAuth = FirebaseAuth.getInstance();
 
     }

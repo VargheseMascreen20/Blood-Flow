@@ -1,9 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".VerifyOTPActivity">
+    tools:context=".MainActivity">
+
+    <!--Edittext for getting users phone number-->
+
+    <!--Button for getting OTP-->
+
+    <!--Edittext for getting otp from user-->
+
+    <!--button for verifying user OTP-->
+
+    <EditText
+        android:id="@+id/idEdtPhoneNumber"
+        android:layout_width="330dp"
+        android:layout_height="66dp"
+
+        android:layout_marginTop="144dp"
+
+        android:hint="Enter your phone"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/idBtnGetOtp"
+        android:layout_width="339dp"
+        android:layout_height="74dp"
+        android:layout_below="@id/idEdtPhoneNumber"
+
+        android:layout_marginTop="52dp"
+        android:text="Get OTP"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idEdtPhoneNumber" />
+
+    <TextView
+        android:id="@+id/countTime"
+        android:layout_width="118dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="20dp"
+        android:layout_weight="2.5"
+        android:autoSizeTextType="uniform"
+        android:textColor="#CCCCCC"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.737"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idBtnGetOtp" />
+
+    <EditText
+        android:id="@+id/idEdtOtp"
+        android:layout_width="352dp"
+        android:layout_height="72dp"
+        android:layout_below="@id/idBtnGetOtp"
+
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="72dp"
+        android:hint="Enter OTP"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idBtnGetOtp" />
+
+    <Button
+        android:id="@+id/idBtnVerify"
+        android:layout_width="339dp"
+        android:layout_height="70dp"
+
+        android:layout_marginTop="48dp"
+        android:text="Verify OTP"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idEdtOtp" />
+    " />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -49,7 +49,6 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     TextView txt,blood_group;
     int PLACE_PICKER_REQUEST = 1;
     Spinner spinner;
-    private WanderMateViewModel viewModel;
 
 
     @Override
@@ -60,19 +59,9 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         txt = view.findViewById(R.id.txt);
         blood_group = view.findViewById(R.id.blood_group);
 
-        viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(WanderMateViewModel.class);
-        viewModel.getAllStops().observe(this, new Observer<List<String>>() {
-            @Override
-            public void onChanged(List<String> stopList) {
-                addStops(stopList);
-            }
-        });
-
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.blood_groups, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
+        
         spinner = view.findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -127,24 +116,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String start = editTxtFrom.getText().toString().trim();
-                String stop = editTxtTo.getText().toString().trim();
-                if(!stops.contains(start)) {
-                    editTxtFrom.setError("Select a location from the drop down list");
-                } else if(!stops.contains(stop)) {
-                    editTxtTo.setError("Select a destination from the drop down list");
-                } else {
-                    closeKeyboard();
-                    editTxtFrom.getText().clear();
-                    editTxtTo.getText().clear();
-                    editTxtFrom.clearFocus();
-                    editTxtTo.clearFocus();
-                    Intent intent = new Intent(getBaseContext(), FilteredServicesViewActivity.class);
+                String start = txt.getText().toString().trim();
+                String stop = blood_group.getText().toString().trim();
+                    Intent intent = new Intent(getActivity(), ProfileFragment.class);
                     intent.putExtra("Start", start);
                     intent.putExtra("Stop", stop);
                     startActivity(intent);
                 }
-            }
+
         });
 
         return view;
@@ -175,16 +154,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         String text = parent.getItemAtPosition(position).toString();
 
     }
-
-
-    private void closeKeyboard() {
-        View view = this.getCurrentFocus();
-        if(view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
+    
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -204,10 +174,4 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         }
     };
 
-    private void addStops(List<String> stopList) {
-        stops = new ArrayList<>(stopList);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, stops);
-        editTxtFrom.setAdapter(adapter);
-        editTxtTo.setAdapter(adapter);
-    }
 }
