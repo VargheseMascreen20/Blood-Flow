@@ -13,9 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="151dp"
+        android:layout_marginEnd="-6dp"
         android:hint="Search Location" />
 
 </RelativeLayout>

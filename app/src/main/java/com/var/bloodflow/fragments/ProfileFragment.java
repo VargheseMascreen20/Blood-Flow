@@ -1,7 +1,5 @@
 package com.var.bloodflow.fragments;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -11,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Images.Media;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,8 +96,8 @@ public class ProfileFragment extends Fragment {
         pd = new ProgressDialog(getActivity());
 
 
-        cameraPermissions = new String[] {android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
-        storagePermissions = new String[] {android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        cameraPermissions = new String[] {android.Manifest.permission.CAMERA,android.Manifest.permission.READ_EXTERNAL_STORAGE};
+        storagePermissions = new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE};
 
         Query query = databaseReference.orderByChild("uname").equalTo(user.getEmail());
         query.addValueEventListener(new ValueEventListener() {
@@ -139,8 +138,9 @@ public class ProfileFragment extends Fragment {
     }
 
 
+
     private boolean checkStoragePermission() {
-        boolean result = ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        boolean result = ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 == (PackageManager.PERMISSION_GRANTED);
         return result;
     }
@@ -152,14 +152,14 @@ public class ProfileFragment extends Fragment {
     private boolean checkCameraPermission() {
         boolean result = ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA)
                 == (PackageManager.PERMISSION_GRANTED);
-        boolean result1 = ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        boolean result1 = ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 == (PackageManager.PERMISSION_GRANTED);
+
         return result && result1;
     }
 
     private void requestCameraPermission() {
-
-          requestPermissions( cameraPermissions, CAMERA_REQUEST_CODE);
+          requestPermissions(cameraPermissions, CAMERA_REQUEST_CODE);
     }
 
 
@@ -273,7 +273,7 @@ public class ProfileFragment extends Fragment {
         switch (requestCode) {
             case CAMERA_REQUEST_CODE: {
                 if (grantResults.length > 0) {
-                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean cameraAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                     boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
                     if (cameraAccepted && writeStorageAccepted) {
                         pickFromCamera();
@@ -299,43 +299,42 @@ public class ProfileFragment extends Fragment {
 
 
 
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == IMAGE_PICK_GALLERY_CODE){
-            if (resultCode == Activity.RESULT_OK){
-                assert data != null;
-                image_uri = data.getData();
-                UploadProfileCoverPhoto(image_uri);
-            }
-        } if (requestCode == IMAGE_PICK_CAMERA_CODE){
-            if (resultCode == RESULT_OK){
-                assert data != null;
-
-                UploadProfileCoverPhoto(image_uri);
-            }
-        }
-
-
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-
-
-
-
-
-//    @Override
 //    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        if(resultCode == RESULT_OK){
-//            if(requestCode == IMAGE_PICK_GALLERY_CODE){
+//        if (requestCode == IMAGE_PICK_GALLERY_CODE){
+//            if (resultCode == RESULT_OK){
+//                assert data != null;
 //                image_uri = data.getData();
 //                UploadProfileCoverPhoto(image_uri);
 //            }
-//            if(requestCode == IMAGE_PICK_CAMERA_CODE ){
+//        } if (requestCode == IMAGE_PICK_CAMERA_CODE){
+//            if (resultCode == RESULT_OK){
+//                assert data != null;
 //                UploadProfileCoverPhoto(image_uri);
 //            }
 //        }
+//
+//
 //        super.onActivityResult(requestCode, resultCode, data);
 //    }
+
+
+
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode == RESULT_OK){
+            if(requestCode == IMAGE_PICK_GALLERY_CODE){
+                image_uri = data.getData();
+                UploadProfileCoverPhoto(image_uri);
+            }
+            if(requestCode == IMAGE_PICK_CAMERA_CODE ){
+                UploadProfileCoverPhoto(image_uri);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     private void UploadProfileCoverPhoto(Uri uri) {
         pd.show();
@@ -383,9 +382,10 @@ public class ProfileFragment extends Fragment {
 
     private void pickFromCamera() {
         ContentValues values = new ContentValues();
-        values.put(MediaStore.Images.Media.TITLE,"Temp Pic");
-        values.put(MediaStore.Images.Media.DESCRIPTION,"Temp Description");
+        values.put(Media.TITLE,"Temp Pic");
+        values.put(Media.DESCRIPTION,"Temp Description");
 
+//        image_uri = getActivity().getContentResolver().insert(Media.EXTERNAL_CONTENT_URI,values);
         image_uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
 
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

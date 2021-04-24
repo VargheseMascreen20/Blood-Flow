@@ -34,8 +34,8 @@
         android:id="@+id/textView11"
         android:layout_width="224dp"
         android:layout_height="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="48dp"
         android:text="Choose Blood Group"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/find"
         android:layout_width="105dp"
         android:layout_height="51dp"
         android:layout_marginStart="140dp"
@@ -91,14 +91,14 @@
         app:layout_constraintTop_toBottomOf="@+id/maps" />
 
     <TextView
-        android:id="@+id/ab"
+        android:id="@+id/blood_group"
         android:layout_width="221dp"
         android:layout_height="57dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="12dp"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.826"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
