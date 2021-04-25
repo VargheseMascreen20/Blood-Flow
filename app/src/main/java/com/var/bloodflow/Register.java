@@ -28,7 +28,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.var.bloodflow.ModelClasses.Users;
 
-import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.util.Calendar;
 
@@ -36,20 +35,17 @@ public class Register extends AppCompatActivity {
 
     public static final String TAG = "TAG";
 
-    EditText email, pass, phno, bldgrp,dob,gender,name;
-    Button register,bck;
+    EditText email, pass, phno, bldgrp, dob, gender, name;
+    Button register, bck;
     String userID;
 
     ImageView cal;
-    private int mDate,mMonth,mYear;
-
+    DatabaseReference reference;
+    private int mDate, mMonth, mYear;
     private Context mContext;
     private FirebaseAuth fAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseDatabase mFirebaseDatabase;
-    DatabaseReference reference;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,11 +63,11 @@ public class Register extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(Register.this,Login.class));
+            startActivity(new Intent(Register.this, Login.class));
             finish();
         }
-        cal =findViewById(R.id.date_picker);
-        cal.setOnClickListener(new View.OnClickListener(){
+        cal = findViewById(R.id.date_picker);
+        cal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Calendar cal = Calendar.getInstance();
@@ -83,20 +79,20 @@ public class Register extends AppCompatActivity {
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
                         dob.setText(MessageFormat.format("{0}-{1}-{2}", date, month, year));
                     }
-                }, mYear,mMonth,mDate);
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
+                }, mYear, mMonth, mDate);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000);
                 datePickerDialog.show();
             }
         });
-        register = (Button)findViewById(R.id.register1);
-        register.setOnClickListener(new OnClickListener(){
+        register = (Button) findViewById(R.id.register1);
+        register.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 final String fname = name.getText().toString().trim();
                 final String emailid = email.getText().toString().trim();
                 final String password = pass.getText().toString().trim();
-                final String phoneno =  phno.getText().toString().trim();
-                final String dateOB =   dob.getText().toString().trim();
+                final String phoneno = phno.getText().toString().trim();
+                final String dateOB = dob.getText().toString().trim();
                 final String gend = gender.getText().toString().trim();
                 final String bloodgrp = bldgrp.getText().toString().trim();
                 final String image = "";
@@ -111,8 +107,7 @@ public class Register extends AppCompatActivity {
                 if (password.length() < 6) {
                     pass.setError("Password Length must be >= 6 Characters");
                     return;
-                }
-                else {
+                } else {
                     fAuth.createUserWithEmailAndPassword(emailid, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
 
@@ -150,7 +145,7 @@ public class Register extends AppCompatActivity {
                                 });
                               */
 
-                                Users users=new Users(userID,fname,emailid,dateOB,phoneno,bloodgrp,gend,password,image);
+                                Users users = new Users(userID, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image);
                                 reference.child(phoneno).setValue(users);
                                 Toast.makeText(com.var.bloodflow.Register.this, "User Created.", Toast.LENGTH_SHORT).show();
 
