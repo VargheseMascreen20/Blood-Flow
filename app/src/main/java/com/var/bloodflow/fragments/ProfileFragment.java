@@ -87,6 +87,7 @@ public class ProfileFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference("users");
         storageReference = FirebaseStorage.getInstance().getReference().child("image");
 
+
         avatar = view.findViewById(R.id.avatar);
         nameTv = view.findViewById(R.id.nameTv);
         emailTv = view.findViewById(R.id.emailTv);
@@ -382,11 +383,11 @@ public class ProfileFragment extends Fragment {
 
     private void pickFromCamera() {
         ContentValues values = new ContentValues();
-        values.put(Media.TITLE,"Temp Pic");
-        values.put(Media.DESCRIPTION,"Temp Description");
+        values.put(MediaStore.Images.Media.TITLE, "Temp Pic");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "Temp Description");
 
 //        image_uri = getActivity().getContentResolver().insert(Media.EXTERNAL_CONTENT_URI,values);
-        image_uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,values);
+        image_uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
         Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, image_uri);
@@ -401,7 +402,17 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    private String getUserPhotoUrl() {
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null && user.getPhotoUrl() != null) {
+            return user.getPhotoUrl().toString();
+        }
+
+        return null;
+    }
 }
+
+
 
 
 

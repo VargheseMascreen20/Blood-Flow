@@ -35,7 +35,7 @@ public class Register extends AppCompatActivity {
 
     public static final String TAG = "TAG";
 
-    EditText email, pass, phno, bldgrp, dob, gender, name;
+    EditText email, pass, phno, bldgrp, dob, gender, name, city;
     Button register, bck;
     String userID;
 
@@ -59,7 +59,7 @@ public class Register extends AppCompatActivity {
         dob = findViewById(R.id.dob);
         gender = findViewById(R.id.gender);
         bldgrp = findViewById(R.id.bldGrp);
-        bck = findViewById(R.id.bck);
+        city = findViewById(R.id.city);
         fAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
         if (fAuth.getCurrentUser() != null) {
@@ -95,6 +95,7 @@ public class Register extends AppCompatActivity {
                 final String dateOB = dob.getText().toString().trim();
                 final String gend = gender.getText().toString().trim();
                 final String bloodgrp = bldgrp.getText().toString().trim();
+                final String place = city.getText().toString().trim();
                 final String image = "";
                 if (TextUtils.isEmpty(emailid)) {
                     email.setError("Email is Required");
@@ -145,7 +146,7 @@ public class Register extends AppCompatActivity {
                                 });
                               */
 
-                                Users users = new Users(userID, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image);
+                                Users users = new Users(userID, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place);
                                 reference.child(phoneno).setValue(users);
                                 Toast.makeText(com.var.bloodflow.Register.this, "User Created.", Toast.LENGTH_SHORT).show();
 

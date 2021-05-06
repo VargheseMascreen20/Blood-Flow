@@ -29,6 +29,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.auth.User;
+import com.var.bloodflow.DonorsList;
 import com.var.bloodflow.ModelClasses.Users;
 import com.var.bloodflow.R;
 
@@ -38,15 +39,16 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class HomeFragment extends Fragment {
     int key = 0;
     String bldGrp;
 
     public HomeFragment() {
 
     }
-    Button maps,find;
-    TextView txt,blood_group;
+
+    Button maps, find;
+    TextView txt, blood_group;
     int PLACE_PICKER_REQUEST = 1;
     Spinner spinner;
 
@@ -118,9 +120,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
             public void onClick(View v) {
                 String start = txt.getText().toString().trim();
                 String stop = blood_group.getText().toString().trim();
-                    Intent intent = new Intent(getActivity(), ProfileFragment.class);
-                    intent.putExtra("Start", start);
-                    intent.putExtra("Stop", stop);
+                Intent intent = new Intent(getActivity(), DonorsList.class);
                     startActivity(intent);
                 }
 
@@ -148,30 +148,5 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         }
     }
 
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-
-    }
-    
-    private TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-            String from = txt.getText().toString().trim();
-            String to = blood_group.getText().toString().trim();
-            find.setEnabled(!from.isEmpty() && !to.isEmpty());
-        }
-
-        @Override
-        public void afterTextChanged(Editable s) {
-
-        }
-    };
 
 }

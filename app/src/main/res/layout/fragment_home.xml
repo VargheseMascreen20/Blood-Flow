@@ -63,12 +63,14 @@
         android:id="@+id/find"
         android:layout_width="105dp"
         android:layout_height="51dp"
-        android:layout_marginStart="140dp"
+        android:layout_marginStart="152dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/submit"
         android:text="FIND"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt" />
+        app:layout_constraintTop_toBottomOf="@+id/txt"
+        app:layout_constraintVertical_bias="0.157" />
 
     <Button
         android:id="@+id/maps"

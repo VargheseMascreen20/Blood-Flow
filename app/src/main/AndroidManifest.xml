@@ -18,6 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blood"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".MyRequests" />
+        <activity android:name=".MakeRequest" />
+        <activity android:name=".DonorsList" />
         <activity android:name=".MainActivity2" />
 
         <meta-data

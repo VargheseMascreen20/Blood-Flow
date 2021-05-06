@@ -2,6 +2,7 @@ package com.var.bloodflow;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -220,20 +221,23 @@ public class Login extends AppCompatActivity {
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                             if (task.getResult().getAdditionalUserInfo().isNewUser()) {
-
                                 Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                                assert user != null;
                                 final String userid = user.getUid();
                                 final String fname = user.getDisplayName();
                                 final String emailid = user.getEmail();
                                 final String phoneno = user.getPhoneNumber();
+                                final String place = "";
                                 final String dateOB = "";
                                 final String gend = "";
                                 final String bloodgrp = "";
                                 final String password = "";
-                                final String image = "";
-                                Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image);
+                                final String image = getUserPhotoUrl();
+                                Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place);
                                 reference.child(userid).setValue(users);
+
                             }
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(Login.this, "Login Failed...", Toast.LENGTH_SHORT).show();
@@ -272,6 +276,15 @@ public class Login extends AppCompatActivity {
                 // ...
             }
         };
+    }
+
+    private String getUserPhotoUrl() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null && user.getPhotoUrl() != null) {
+            return user.getPhotoUrl().toString();
+        }
+
+        return null;
     }
 
     public void onBackPressed() {

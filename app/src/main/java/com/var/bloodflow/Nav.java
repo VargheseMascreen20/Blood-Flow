@@ -65,7 +65,6 @@ public class Nav extends AppCompatActivity {
             return false;
         }
     };
-    FirebaseAuth fAuth;
 //    private void checkUserStatus(){
 //        FirebaseUser user = fAuth.getCurrentUser();
 //        if (user != null)

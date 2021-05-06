@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -34,6 +36,24 @@ public class SettingsFragment  extends PreferenceFragmentCompat {
         phone=sp.getString("Phone Number", "");
         SharedPreferences.Editor editor = sp.edit();
         profile.setTitle(name);
+        report.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            public boolean onPreferenceClick(Preference preference) {
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.envyandroid.com"));
+//                startActivity(intent);
+//                return false;
+
+                Intent i = new Intent(Intent.ACTION_SEND);
+                //i.setType("text/plain"); //use this line for testing in the emulator
+                i.setType("message/rfc822"); // use from live device
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"test@gmail.com"});
+                i.putExtra(Intent.EXTRA_SUBJECT, "subject goes here");
+                i.putExtra(Intent.EXTRA_TEXT, "body goes here");
+                startActivity(Intent.createChooser(i, "Select email application."));
+                return false;
+            }
+        });
+
         report.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             public boolean onPreferenceClick(Preference preference) {
@@ -93,5 +113,11 @@ public class SettingsFragment  extends PreferenceFragmentCompat {
                 return false;
             }
         });
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

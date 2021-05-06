@@ -1,23 +1,12 @@
 package com.var.bloodflow.ModelClasses;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
-public class Users implements Parcelable {
-    public static final Parcelable.Creator<Users> CREATOR = new Parcelable.Creator<Users>() {
-        @Override
-        public Users createFromParcel(Parcel in) {
-            return new Users(in);
-        }
+public class Users {
 
-        @Override
-        public Users[] newArray(int size) {
-            return new Users[size];
-        }
-    };
-    private String user_id, name, uname, dob, phno, bldgrp, gender, password, image;
+    private String user_id, name, uname, dob, phno, bldgrp, gender, password, image, place;
 
-    public Users(String user_id, String name, String uname, String dob, String phno, String bldgrp, String gender, String password, String image) {
+    public Users(String user_id, String name, String uname, String dob, String phno, String bldgrp, String gender, String password, String image, String place) {
         this.user_id = user_id;
         this.name = name;
         this.uname = uname;
@@ -27,6 +16,7 @@ public class Users implements Parcelable {
         this.gender = gender;
         this.password = password;
         this.image = image;
+        this.place = place;
     }
 
 
@@ -117,33 +107,11 @@ public class Users implements Parcelable {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", username='" + uname + '\'' +
-                ", date_of_birth='" + dob + '\'' +
-                ", phone_number='" + phno + '\'' +
-                ", blood_group='" + bldgrp + '\'' +
-                ", gender='" + gender + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getPlace() {
+        return place;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setPlace(String place) {
+        this.place = place;
     }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(uname);
-        dest.writeString(dob);
-        dest.writeString(phno);
-        dest.writeString(bldgrp);
-        dest.writeString(gender);
-        dest.writeString(password);
-    }
-
 }

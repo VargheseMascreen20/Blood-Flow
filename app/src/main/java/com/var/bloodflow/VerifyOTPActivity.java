@@ -195,7 +195,8 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                 final String bloodgrp = "";
                                 final String password = "";
                                 final String image = "";
-                                Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image);
+                                final String city = "";
+                                Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, city);
                                 reference.child(userid).setValue(users);
                                 Intent i = new Intent(VerifyOTPActivity.this, Nav.class);
                                 startActivity(i);
