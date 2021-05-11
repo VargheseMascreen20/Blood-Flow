@@ -5,30 +5,34 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.var.bloodflow.MainActivity2;
+import com.google.firebase.database.ValueEventListener;
+import com.var.bloodflow.Adapters.RequestAdapter;
 import com.var.bloodflow.MakeRequest;
 import com.var.bloodflow.ModelClasses.MakeRequestModel;
-import com.var.bloodflow.MyRequests;
 import com.var.bloodflow.R;
 
-public class RequestsFragment extends Fragment {
-    private RecyclerView req_list;
-    private DatabaseReference reference;
+import java.util.ArrayList;
 
+public class RequestsFragment extends Fragment {
+
+    private DatabaseReference reference;
+    private ArrayList<MakeRequestModel> list;
+    private RecyclerView recyclerView;
+    private SearchView searchView;
     private FloatingActionButton fabAdd;
 
     public RequestsFragment() {
@@ -38,12 +42,9 @@ public class RequestsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_requests, container, false);
 
         reference = FirebaseDatabase.getInstance().getReference().child("request");
-        reference.keepSynced(true);
 
-        req_list = (RecyclerView) view.findViewById(R.id.req_list);
-        req_list.setHasFixedSize(true);
-        req_list.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        recyclerView = view.findViewById(R.id.req_list);
+        searchView = view.findViewById(R.id.searchView);
 
         fabAdd = view.findViewById(R.id.fab_add);
         fabAdd.setOnClickListener(new View.OnClickListener() {
@@ -58,52 +59,56 @@ public class RequestsFragment extends Fragment {
 
     public void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<MakeRequestModel, RequestsViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<MakeRequestModel, RequestsViewHolder>
-                (MakeRequestModel.class, R.layout.request_row, RequestsViewHolder.class, reference) {
-            @Override
-            protected void populateViewHolder(RequestsViewHolder requestsViewHolder, MakeRequestModel model, int i) {
-                requestsViewHolder.setName(model.getPatientName());
-                requestsViewHolder.setpBloodGrp(model.getBlood_group());
-                requestsViewHolder.setHospital(model.getHospitaltName());
-                requestsViewHolder.setUnits(model.getRequired_units());
-                requestsViewHolder.setPlace(model.getCity());
+        if (reference != null) {
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        list = new ArrayList<>();
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            list.add(ds.getValue(MakeRequestModel.class));
+                        }
+                        RequestAdapter adapterClass = new RequestAdapter(list);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                        recyclerView.setAdapter(adapterClass);
+                    }
+                    if (searchView != null) {
+                        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                            @Override
+                            public boolean onQueryTextSubmit(String s) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onQueryTextChange(String s) {
+                                search(s);
+                                return true;
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    private void search(String str) {
+        ArrayList<MakeRequestModel> myList = new ArrayList<>();
+        for (MakeRequestModel object : list) {
+            if (object.getBlood_group().toLowerCase().contains(str.toLowerCase()) ||
+                    object.getHospitaltName().toLowerCase().contains(str.toLowerCase()) ||
+                    object.getPatientName().toLowerCase().contains(str.toLowerCase())) {
+                myList.add(object);
             }
-        };
-        req_list.setAdapter(firebaseRecyclerAdapter);
+        }
+        RequestAdapter adapterClass = new RequestAdapter(myList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapterClass);
     }
 
-    public static class RequestsViewHolder extends RecyclerView.ViewHolder {
-        View mview;
-
-        public RequestsViewHolder(View itemView) {
-            super(itemView);
-            mview = itemView;
-        }
-
-        public void setName(String pname) {
-            TextView name = mview.findViewById(R.id.name);
-            name.setText("Name : " + pname);
-        }
-
-        public void setpBloodGrp(String pBloodGrp) {
-            TextView bldgrp = mview.findViewById(R.id.blood_group);
-            bldgrp.setText("Blood Group : " + pBloodGrp);
-        }
-
-        public void setHospital(String hospital) {
-            TextView hospt = mview.findViewById(R.id.hospital);
-            hospt.setText("Hospital : " + hospital);
-        }
-
-        public void setUnits(String units) {
-            TextView noOfUnits = mview.findViewById(R.id.units);
-            noOfUnits.setText("Units Required : " + units);
-        }
-
-        public void setPlace(String place) {
-            TextView usrPlace = mview.findViewById(R.id.place);
-            usrPlace.setText("Place : " + place);
-        }
-    }
 
 }

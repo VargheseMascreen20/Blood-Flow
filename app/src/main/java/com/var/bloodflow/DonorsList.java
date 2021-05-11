@@ -68,7 +68,7 @@ public class DonorsList extends AppCompatActivity {
 
         public void setDBloodGrp(String bldGrp) {
             TextView donorBloodGrp = mview.findViewById(R.id.donorBloodGrp);
-            donorBloodGrp.setText("Units Required : " + bldGrp);
+            donorBloodGrp.setText("Blood Group : " + bldGrp);
         }
 
         public void setPlace(String place) {
