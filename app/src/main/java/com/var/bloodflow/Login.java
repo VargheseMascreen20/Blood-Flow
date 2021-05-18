@@ -2,7 +2,6 @@ package com.var.bloodflow;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -42,7 +41,6 @@ public class Login extends AppCompatActivity {
     Button mLoginBtn, otpLogin;
     TextView mCreateBtn, forgotTextLink;
     ProgressBar progressBar;
-    String userID;
 
     FirebaseAuth fAuth;
     SignInButton mGoogleLoginBtn;

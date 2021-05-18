@@ -1,4 +1,4 @@
-package com.var.bloodflow.fragments;
+package com.var.bloodflow.MainFragments;
 
 import android.content.Intent;
 import android.os.Bundle;

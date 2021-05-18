@@ -7,12 +7,10 @@
     android:layout_height="match_parent"
     android:background="#F1EDED">
 
-
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="120dp"
         android:layout_height="120dp"
-
         android:layout_marginTop="124dp"
         android:background="@color/light_grey"
         android:src="@drawable/ic_add_image"
@@ -69,27 +67,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:textColor="@color/black">
-
-            </TextView>
+                android:textColor="@color/black"></TextView>
 
             <TextView
                 android:id="@+id/phoneTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:textColor="@color/black">
-
-            </TextView>
+                android:textColor="@color/black"></TextView>
 
         </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-

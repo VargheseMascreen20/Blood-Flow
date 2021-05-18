@@ -10,12 +10,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.var.bloodflow.fragments.HistoryFragment;
-import com.var.bloodflow.fragments.HomeFragment;
-import com.var.bloodflow.fragments.ProfileFragment;
-import com.var.bloodflow.fragments.RequestsFragment;
-import com.var.bloodflow.fragments.SettingsFragment;
+import com.var.bloodflow.MainFragments.HistoryFragment;
+import com.var.bloodflow.MainFragments.HomeFragment;
+import com.var.bloodflow.MainFragments.MessagingFragment;
+import com.var.bloodflow.MainFragments.RequestsFragment;
+import com.var.bloodflow.MainFragments.SettingsFragment;
 
 import static com.var.bloodflow.R.id.nav_history;
 import static com.var.bloodflow.R.id.nav_home;
@@ -49,7 +48,7 @@ public class Nav extends AppCompatActivity {
                     ft3.commit();
                     return true;
                 case nav_profile:
-                    ProfileFragment fragment4 = new ProfileFragment();
+                    MessagingFragment fragment4 = new MessagingFragment();
                     FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
                     ft4.replace(R.id.fragment_container, fragment4, "");
                     ft4.commit();

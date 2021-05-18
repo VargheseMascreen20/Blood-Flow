@@ -31,20 +31,13 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
                     sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = sp.edit();
-//        editor.putString("Image", "Image");
-//        editor.putInt("User ID", 1);
-//        editor.putInt("Log in Status", 0);
-//        editor.apply();
-
                     String name = sp.getString("Name", "");
                     Log.d("Name: ", name);
                     if (sp.getInt("Log in Status", 0) == 2) {
                         Intent check = new Intent(MainActivity.this, Nav.class);
                         startActivity(check);
                         finish();
-                    }
-                    else if (!sp.contains("Phone Number")) {
+                    } else if (!sp.contains("Phone Number")) {
                         Intent register = new Intent(MainActivity.this, Login.class);
                         startActivity(register);
                         Toast.makeText(MainActivity.this, "Phn no & details not collected ", Toast.LENGTH_SHORT).show();
@@ -60,10 +53,18 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
-        }; thread.start();
+        };
+        thread.start();
 
 
     }
 
 
 }
+
+//        SharedPreferences.Editor editor = sp.edit();
+//        editor.putString("Image", "Image");
+//        editor.putInt("User ID", 1);
+//        editor.putInt("Log in Status", 0);
+//        editor.apply();
+

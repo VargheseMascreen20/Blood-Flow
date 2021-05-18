@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <PreferenceCategory android:title="Profile">
+    <PreferenceCategory android:title="Settings">
         <Preference
+            android:icon="@drawable/acc"
             android:key="change_pro_key"
-            android:summary="Change Profile"
-            android:icon="@drawable/acc">
-            <intent
-                android:id="@+id/change_profile_intent"
-                android:targetClass="com.var.bloodflow.fragments.SettingsFragment.class"
-                android:targetPackage="com.var.bloodflow.fragments" />
+            android:summary="View Profile">
+            <!--            <intent-->
+            <!--                android:id="@+id/change_profile_intent"-->
+            <!--                android:targetClass="com.var.bloodflow.fragments.SettingsFragment.class"-->
+            <!--                android:targetPackage="com.var.bloodflow.fragments" />-->
+            <!--        </Preference>-->
         </Preference>
     </PreferenceCategory>
-
     <Preference
         android:icon="@drawable/setting"
         android:key="history_key"
         android:title="Settings">
-        <intent
-            android:id="@+id/history_intent"
-            android:targetClass="com.example.recycle.SubActivity.History"
-            android:targetPackage="com.example.recycle" />
+        <!--        <intent-->
+        <!--            android:id="@+id/history_intent"-->
+        <!--            android:targetClass="com.example.recycle.SubActivity.History"-->
+        <!--            android:targetPackage="com.example.recycle" />-->
     </Preference>
     <Preference
         android:icon="@drawable/support"

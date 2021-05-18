@@ -74,7 +74,8 @@ public class Register extends AppCompatActivity {
                 mDate = cal.get(Calendar.DATE);
                 mMonth = cal.get(Calendar.MONTH);
                 mYear = cal.get(Calendar.YEAR);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(Register.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Register.this,
+                        android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
                         dob.setText(MessageFormat.format("{0}-{1}-{2}", date, month, year));
@@ -129,23 +130,6 @@ public class Register extends AppCompatActivity {
 
                                 Toast.makeText(com.var.bloodflow.Register.this, "User Created.", Toast.LENGTH_SHORT).show();
                                 userID = fAuth.getCurrentUser().getUid();
-                               /* DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userID);
-                                Map<String, Object> user = new HashMap<>();
-                                user.put("email", email);
-                                user.put("phone", phno);
-                                databaseReference.setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Log.d(TAG, "onSuccess: user Profile is created for " + userID);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.d(TAG, "onFailure: " + e.toString());
-                                    }
-                                });
-                              */
-
                                 Users users = new Users(userID, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place);
                                 reference.child(phoneno).setValue(users);
                                 Toast.makeText(com.var.bloodflow.Register.this, "User Created.", Toast.LENGTH_SHORT).show();
@@ -165,3 +149,21 @@ public class Register extends AppCompatActivity {
 
     }
 }
+
+
+ /* DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userID);
+                                Map<String, Object> user = new HashMap<>();
+                                user.put("email", email);
+                                user.put("phone", phno);
+                                databaseReference.setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "onSuccess: user Profile is created for " + userID);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d(TAG, "onFailure: " + e.toString());
+                                    }
+                                });
+                              */

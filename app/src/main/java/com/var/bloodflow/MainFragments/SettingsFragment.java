@@ -1,4 +1,4 @@
-package com.var.bloodflow.fragments;
+package com.var.bloodflow.MainFragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,35 +7,53 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.var.bloodflow.Login;
+import com.var.bloodflow.ProfileActivity;
 import com.var.bloodflow.R;
 
-public class SettingsFragment  extends PreferenceFragmentCompat {
+public class SettingsFragment extends PreferenceFragmentCompat {
     private Preference report, profile, delete, logout;
-    private String name,phone;
+    FirebaseDatabase firebaseDatabase;
     private int id;
+
     FirebaseAuth firebaseAuth;
+    FirebaseUser user;
+    DatabaseReference databaseReference;
+    private String name, nameUser, phone;
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("users");
+        nameUser = firebaseAuth.getCurrentUser().getDisplayName();
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
         report = (Preference) findPreference("report_key");
         profile = findPreference("change_pro_key");
         delete = findPreference("delete_key");
         logout = findPreference("log_out_key");
         SharedPreferences sp = getContext().getSharedPreferences("Credentials", Context.MODE_PRIVATE);
-        id=sp.getInt("User ID", 0);
-        name=sp.getString("Name", "");
-        phone=sp.getString("Phone Number", "");
+        id = sp.getInt("User ID", 0);
+        name = sp.getString("Name", "");
+        phone = sp.getString("Phone Number", "");
         SharedPreferences.Editor editor = sp.edit();
-        profile.setTitle(name);
+        profile.setTitle(nameUser);
         report.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             public boolean onPreferenceClick(Preference preference) {
@@ -54,20 +72,11 @@ public class SettingsFragment  extends PreferenceFragmentCompat {
             }
         });
 
-        report.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        profile.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             public boolean onPreferenceClick(Preference preference) {
-//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.envyandroid.com"));
-//                startActivity(intent);
-//                return false;
-
-                Intent i = new Intent(Intent.ACTION_SEND);
-                //i.setType("text/plain"); //use this line for testing in the emulator
-                i.setType("message/rfc822"); // use from live device
-                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"test@gmail.com"});
-                i.putExtra(Intent.EXTRA_SUBJECT, "subject goes here");
-                i.putExtra(Intent.EXTRA_TEXT, "body goes here");
-                startActivity(Intent.createChooser(i, "Select email application."));
+                Intent intent = new Intent(getContext(), ProfileActivity.class);
+                startActivity(intent);
                 return false;
             }
         });
@@ -76,9 +85,8 @@ public class SettingsFragment  extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
 
-                Intent intent = new Intent(getContext(), com.var.bloodflow.Login.class);
+                Intent intent = new Intent(getContext(), Login.class);
                 startActivity(intent);
-
                 return false;
             }
         });
@@ -115,9 +123,4 @@ public class SettingsFragment  extends PreferenceFragmentCompat {
         });
     }
 
-    public boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
 }

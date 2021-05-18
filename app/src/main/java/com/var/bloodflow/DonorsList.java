@@ -1,25 +1,29 @@
 package com.var.bloodflow;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.var.bloodflow.ModelClasses.MakeRequestModel;
+import com.google.firebase.database.ValueEventListener;
+import com.var.bloodflow.Adapters.DonorsAdapter;
 import com.var.bloodflow.ModelClasses.Users;
-import com.var.bloodflow.fragments.RequestsFragment;
+
+import java.util.ArrayList;
 
 public class DonorsList extends AppCompatActivity {
     Button messageBtn;
     private RecyclerView donors_list;
+    private ArrayList<Users> list;
+    private RecyclerView recyclerView;
     private DatabaseReference reference;
 
     @Override
@@ -40,40 +44,40 @@ public class DonorsList extends AppCompatActivity {
 
     public void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<Users, DonorsList.DonorsViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, DonorsList.DonorsViewHolder>
-                (Users.class, R.layout.donors_row, DonorsList.DonorsViewHolder.class, reference) {
-            @Override
-            protected void populateViewHolder(DonorsViewHolder donorsViewHolder, Users users, int i) {
-                donorsViewHolder.setName(users.getName());
-                donorsViewHolder.setDBloodGrp(users.getBldgrp());
-                donorsViewHolder.setPlace(users.getPlace());
-            }
+        if (reference != null) {
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        list = new ArrayList<>();
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            list.add(ds.getValue(Users.class));
+                        }
+                        DonorsAdapter adapterClass = new DonorsAdapter(list);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(DonorsList.this));
+                        recyclerView.setAdapter(adapterClass);
+                    }
+//                    if (searchView != null) {
+//                        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//                            @Override
+//                            public boolean onQueryTextSubmit(String s) {
+//                                return false;
+//                            }
+//
+//                            @Override
+//                            public boolean onQueryTextChange(String s) {
+//                                search(s);
+//                                return true;
+//                            }
+//                        });
+//                    }
+                }
 
-        };
-        donors_list.setAdapter(firebaseRecyclerAdapter);
-    }
-
-    public static class DonorsViewHolder extends RecyclerView.ViewHolder {
-        View mview;
-
-        public DonorsViewHolder(View itemView) {
-            super(itemView);
-            mview = itemView;
-        }
-
-        public void setName(String dName) {
-            TextView name = mview.findViewById(R.id.donorName);
-            name.setText("Name : " + dName);
-        }
-
-        public void setDBloodGrp(String bldGrp) {
-            TextView donorBloodGrp = mview.findViewById(R.id.donorBloodGrp);
-            donorBloodGrp.setText("Blood Group : " + bldGrp);
-        }
-
-        public void setPlace(String place) {
-            TextView donorPlace = mview.findViewById(R.id.donorPlace);
-            donorPlace.setText("Place : " + place);
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(DonorsList.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }
