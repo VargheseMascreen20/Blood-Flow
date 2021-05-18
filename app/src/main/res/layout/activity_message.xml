@@ -45,31 +45,37 @@
     <RelativeLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="673dp"
+        android:layout_height="679dp"
+        android:layout_below="@+id/bar_layout"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="2dp"
         android:layout_marginBottom="-6dp"
         android:background="@color/light_grey"
         android:padding="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
-            android:layout_width="393dp"
-            android:layout_height="552dp"
+            android:layout_width="384dp"
+            android:layout_height="600dp"
+            android:layout_above="@+id/text_send"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="-600dp" />
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="7dp" />
 
         <ImageButton
             android:id="@+id/btn_send"
-            android:layout_width="48dp"
-            android:layout_height="55dp"
+            android:layout_width="70dp"
+            android:layout_height="51dp"
+            android:layout_below="@+id/recycler_view"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="6dp"
             android:layout_marginRight="17dp"
-            android:layout_marginBottom="19dp"
+            android:layout_marginBottom="17dp"
             android:background="@drawable/ic_send"
             android:elevation="8dp" />
 
@@ -78,8 +84,8 @@
             android:layout_width="326dp"
             android:layout_height="47dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="23dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="20dp"
             android:layout_toLeftOf="@+id/btn_send"
             android:background="@android:color/white"
             android:hint="Type a message" />
