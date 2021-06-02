@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blood"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".GetInfo"></activity>
+        <activity android:name=".ErrorPage" />
+        <activity android:name=".MessageActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".MyRequests" />

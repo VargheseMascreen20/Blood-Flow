@@ -93,6 +93,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         public void onVerificationFailed(FirebaseException e) {
             // displaying error message with firebase exception.
             Toast.makeText(VerifyOTPActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            finish();
         }
 
     };
@@ -140,6 +141,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                         @Override
                         public void onFinish() {
                             countTime.setText("TimeOut");
+
                         }
                     }.start();
                 }
@@ -183,9 +185,9 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                 String phone = edtPhone.getText().toString();
 
                                 Toast.makeText(VerifyOTPActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                final String userid = user.getUid();
-                                final String fname = user.getDisplayName();
-                                final String emailid = user.getEmail();
+                                final String userid = "";
+                                final String fname = "";
+                                final String emailid = "";
                                 final String phoneno = phone;
                                 final String dateOB = "";
                                 final String gend = "";
@@ -195,7 +197,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                 final String city = "";
                                 Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, city);
                                 reference.child(userid).setValue(users);
-                                Intent i = new Intent(VerifyOTPActivity.this, Nav.class);
+                                Intent i = new Intent(VerifyOTPActivity.this, GetInfo.class);
                                 startActivity(i);
                                 finish();
                             }
@@ -204,6 +206,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                             // if the code is not correct then we are
                             // displaying an error message to the user.
                             Toast.makeText(VerifyOTPActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            finish();
                         }
                     }
                 });
@@ -213,6 +216,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
         countTime.setText(timeLeftFormatted);
+
     }
 
     private void sendVerificationCode(String number) {
@@ -241,5 +245,6 @@ public class VerifyOTPActivity extends AppCompatActivity {
         // after getting credential we are
         // calling sign in method.
         signInWithCredential(credential);
+        finish();
     }
 }

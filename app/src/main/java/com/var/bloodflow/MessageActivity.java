@@ -101,18 +101,23 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Users user = dataSnapshot.getValue(Users.class);
-                username.setText(user.getName());
-                if (user.getImage().equals("default")) {
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
-                } else {
-                    Glide.with(MessageActivity.this).load(user.getImage()).into(profile_image);
+                try {
+                    username.setText(user.getName());
+                    if (user.getImage().equals("default")) {
+                        profile_image.setImageResource(R.mipmap.ic_launcher);
+                    } else {
+                        Glide.with(MessageActivity.this).load(user.getImage()).into(profile_image);
+                    }
+                    readMessages(fuser.getUid(), userid, user.getImage());
+                } catch (Exception e) {
+                    Toast.makeText(MessageActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(MessageActivity.this, ErrorPage.class);
+                    startActivity(i);
                 }
-                readMessages(fuser.getUid(), userid, user.getImage());
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -139,6 +144,7 @@ public class MessageActivity extends AppCompatActivity {
                 mChat.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Chat chat = snapshot.getValue(Chat.class);
+                    assert chat != null;
                     if (chat.getReceiver() != null && chat.getReceiver().equals(myid) && chat.getSender().equals(userid) ||
                             chat.getReceiver() != null && chat.getReceiver().equals(userid) && chat.getSender().equals(myid)) {
                         mChat.add(chat);

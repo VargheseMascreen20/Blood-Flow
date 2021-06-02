@@ -101,6 +101,7 @@ public class RequestsFragment extends Fragment {
         for (MakeRequestModel object : list) {
             if (object.getBlood_group().toLowerCase().contains(str.toLowerCase()) ||
                     object.getHospitaltName().toLowerCase().contains(str.toLowerCase()) ||
+                    object.getCity().toLowerCase().contains(str.toLowerCase()) ||
                     object.getPatientName().toLowerCase().contains(str.toLowerCase())) {
                 myList.add(object);
             }
