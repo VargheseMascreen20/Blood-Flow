@@ -3,19 +3,19 @@
 
     <item
         android:id="@+id/nav_home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/ic_home"
         android:title="Home" />
     <item
         android:id="@+id/nav_request"
         android:icon="@drawable/request"
-        android:title="Request" />
+        android:title="Requests" />
     <item
         android:id="@+id/nav_history"
         android:icon="@drawable/history"
-        android:title="Donation History" />
+        android:title="Donations" />
     <item
         android:id="@+id/nav_profile"
-        android:icon="@drawable/profile"
+        android:icon="@drawable/ic_message"
         android:title="Chat" />
     <item
         android:id="@+id/nav_settings"

@@ -179,13 +179,12 @@ public class VerifyOTPActivity extends AppCompatActivity {
                             // we are sending our user to new activity.
 
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
                             if (task.getResult().getAdditionalUserInfo().isNewUser()) {
 
                                 String phone = edtPhone.getText().toString();
 
                                 Toast.makeText(VerifyOTPActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                final String userid = "";
+                                final String userid = user.getUid();
                                 final String fname = "";
                                 final String emailid = "";
                                 final String phoneno = phone;
@@ -193,13 +192,12 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                 final String gend = "";
                                 final String bloodgrp = "";
                                 final String password = "";
-                                final String image = "";
+                                final String image = "https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1";
                                 final String city = "";
                                 Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, city);
                                 reference.child(userid).setValue(users);
                                 Intent i = new Intent(VerifyOTPActivity.this, GetInfo.class);
                                 startActivity(i);
-                                finish();
                             }
 
                         } else {

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,13 +24,12 @@ import com.var.bloodflow.ProfileActivity;
 import com.var.bloodflow.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
-    private Preference report, profile, delete, logout;
     FirebaseDatabase firebaseDatabase;
-    private int id;
-
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
     DatabaseReference databaseReference;
+    private Preference report, profile, delete, logout, help_support;
+    private int id;
     private String name, nameUser, phone;
 
     @Override
@@ -42,7 +39,27 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         user = firebaseAuth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("users");
-        nameUser = firebaseAuth.getCurrentUser().getDisplayName();
+
+        Query query = databaseReference.orderByChild("user_id").equalTo(user.getUid());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    String name = "" + ds.child("name").getValue();
+                    nameUser = name;
+                    profile.setTitle(nameUser);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
         report = (Preference) findPreference("report_key");
         profile = findPreference("change_pro_key");
@@ -53,7 +70,21 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         name = sp.getString("Name", "");
         phone = sp.getString("Phone Number", "");
         SharedPreferences.Editor editor = sp.edit();
-        profile.setTitle(nameUser);
+        help_support = findPreference("help_key");
+
+        help_support.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            public boolean onPreferenceClick(Preference preference) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("message/rfc822"); // use from live device
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"bloodflow@gmail.com"});
+                i.putExtra(Intent.EXTRA_SUBJECT, "subject goes here");
+                i.putExtra(Intent.EXTRA_TEXT, "body goes here");
+                startActivity(Intent.createChooser(i, "Select email application."));
+                return false;
+            }
+        });
+
         report.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             public boolean onPreferenceClick(Preference preference) {
@@ -64,7 +95,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 //i.setType("text/plain"); //use this line for testing in the emulator
                 i.setType("message/rfc822"); // use from live device
-                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"test@gmail.com"});
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"bloodflow@gmail.com"});
                 i.putExtra(Intent.EXTRA_SUBJECT, "subject goes here");
                 i.putExtra(Intent.EXTRA_TEXT, "body goes here");
                 startActivity(Intent.createChooser(i, "Select email application."));

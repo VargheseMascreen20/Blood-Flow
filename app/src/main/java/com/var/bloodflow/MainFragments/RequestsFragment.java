@@ -50,7 +50,7 @@ public class RequestsFragment extends Fragment {
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), MakeRequest.class);
+                Intent i = new Intent(getContext(), MakeRequest.class);
                 startActivity(i);
             }
         });
@@ -90,7 +90,6 @@ public class RequestsFragment extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -109,6 +108,7 @@ public class RequestsFragment extends Fragment {
         RequestAdapter adapterClass = new RequestAdapter(myList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapterClass);
+
     }
 
 

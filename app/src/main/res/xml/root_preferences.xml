@@ -24,12 +24,7 @@
     <Preference
         android:icon="@drawable/support"
         android:key="help_key"
-        android:title="Help and Support">
-        <intent
-            android:id="@+id/help_intent"
-            android:action="android.intent.action.VIEW"
-            android:data="https://www.google.com/" />
-    </Preference>
+        android:title="Help and Support" />
     <Preference
         android:icon="@drawable/report"
         android:key="report_key"
@@ -40,7 +35,13 @@
         android:key="about_key"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="About" />
+        android:title="About">
+        <intent
+            android:id="@+id/help_intent"
+            android:action="android.intent.action.VIEW"
+            android:data="https://www.google.com/search?q=blood+flow+app&amp;oq=blood+flow+app&amp;aqs=chrome..69i57j69i60l3.7128j0j1&amp;sourceid=chrome&amp;ie=UTF-8" />
+    </Preference>
+
     <!--    </Preference>-->
     <!--    <Preference>-->
     <EditTextPreference

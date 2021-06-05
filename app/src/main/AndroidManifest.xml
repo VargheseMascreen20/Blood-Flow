@@ -18,11 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blood"
         android:usesCleartextTraffic="true">
-        <activity android:name=".GetInfo"></activity>
+        <activity android:name=".GetInfo" />
         <activity android:name=".ErrorPage" />
         <activity android:name=".MessageActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".ChatActivity" />
         <activity android:name=".MyRequests" />
         <activity android:name=".MakeRequest" />
         <activity android:name=".DonorsList" />
@@ -36,13 +35,17 @@
             android:value="AIzaSyCIbijViDTq6dbaZ43kd4JP5Wb58hcBtSo" />
 
         <activity android:name=".VerifyOTPActivity" />
-        <activity android:name=".Nav" />
+        <activity
+            android:name=".Nav"
+            android:parentActivityName=".Login" />
         <activity android:name=".Login">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.var.bloodflow.Login" />
         </activity>
-        <activity android:name=".Register" />
+        <activity
+            android:name=".Register"
+            android:parentActivityName=".Login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

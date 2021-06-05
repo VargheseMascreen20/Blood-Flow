@@ -2,6 +2,7 @@ package com.var.bloodflow;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,48 +24,48 @@ import static com.var.bloodflow.R.id.nav_request;
 import static com.var.bloodflow.R.id.nav_settings;
 
 public class Nav extends AppCompatActivity {
-
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case nav_home:
                     HomeFragment fragment1 = new HomeFragment();
                     FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
                     ft1.replace(R.id.fragment_container, fragment1, "");
-                    ft1.commit();
+                    ft1.addToBackStack(null).commit();
                     return true;
                 case nav_request:
                     RequestsFragment fragment2 = new RequestsFragment();
                     FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
                     ft2.replace(R.id.fragment_container, fragment2, "");
-                    ft2.commit();
+                    ft2.addToBackStack(null).commit();
                     return true;
                 case nav_history:
                     HistoryFragment fragment3 = new HistoryFragment();
                     FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
                     ft3.replace(R.id.fragment_container, fragment3, "");
-                    ft3.commit();
+                    ft3.addToBackStack(null).commit();
                     return true;
                 case nav_profile:
                     MessagingFragment fragment4 = new MessagingFragment();
                     FragmentTransaction ft4 = getSupportFragmentManager().beginTransaction();
                     ft4.replace(R.id.fragment_container, fragment4, "");
-                    ft4.commit();
+                    ft4.addToBackStack(null).commit();
                     return true;
 
                 case nav_settings:
                     SettingsFragment fragment5 = new SettingsFragment();
                     FragmentTransaction ft5 = getSupportFragmentManager().beginTransaction();
                     ft5.replace(R.id.fragment_container, fragment5, "");
-                    ft5.commit();
+                    ft5.addToBackStack(null).commit();
                     return true;
             }
             return false;
         }
     };
-//    private void checkUserStatus(){
+    int count;
+    private long backPressedTime;
+    //    private void checkUserStatus(){
 //        FirebaseUser user = fAuth.getCurrentUser();
 //        if (user != null)
 //        {
@@ -81,20 +82,7 @@ public class Nav extends AppCompatActivity {
 //        checkUserStatus();
 //        super.onStart();
 //    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nav);
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(nav_home, new HomeFragment()).commit();
-        setUpLandingFragment();
-
-
-//        fAuth = FirebaseAuth.getInstance();
-
-    }
+    private Toast backToast;
 
     private void setUpLandingFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -105,4 +93,31 @@ public class Nav extends AppCompatActivity {
         ft1.replace(R.id.fragment_container, fragment1, "");
         ft1.commit();
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_nav);
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        getSupportFragmentManager().beginTransaction().replace(nav_home, new HomeFragment()).addToBackStack(null).commit();
+        setUpLandingFragment();
+
+
+//        fAuth = FirebaseAuth.getInstance();
+
+    }
+
+    public void onBackPressed() {
+//        if (backPressedTime + 2000 > System.currentTimeMillis()){
+//            backToast.cancel();
+//            return;
+//        }else {
+//            backToast = Toast.makeText(getBaseContext(),"Press Back again to exit",Toast.LENGTH_SHORT);
+//            backToast.show();
+//        }
+//        backPressedTime = System.currentTimeMillis();
+//        finish();
+    }
+
 }

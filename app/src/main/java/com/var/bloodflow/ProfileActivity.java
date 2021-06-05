@@ -1,10 +1,5 @@
 package com.var.bloodflow;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -15,14 +10,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,7 +54,6 @@ public class ProfileActivity extends AppCompatActivity {
     StorageReference storageReference;
     String storagePath = "Users_Profile_Cover_Imgs/";
 
-
     ImageView avatar;
     TextView nameTv, emailTv, phoneTv;
     FloatingActionButton fab;
@@ -67,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     Uri image_uri;
     String profilePhoto;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("users");
         storageReference = FirebaseStorage.getInstance().getReference().child("image");
+        id = user.getUid();
 
 
         avatar = findViewById(R.id.avatar);
@@ -91,7 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
         cameraPermissions = new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.READ_EXTERNAL_STORAGE};
         storagePermissions = new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE};
 
-        Query query = databaseReference.orderByChild("uname").equalTo(user.getEmail());
+        Query query = databaseReference.orderByChild("user_id").equalTo(user.getUid());
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -108,7 +107,7 @@ public class ProfileActivity extends AppCompatActivity {
                     try {
                         Picasso.get().load(image).into(avatar);
                     } catch (Exception e) {
-                        Picasso.get().load(R.drawable.ic_add_image).into(avatar);
+                        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1").into(avatar);
                     }
                 }
             }
@@ -380,16 +379,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
-
-    private String getUserPhotoUrl() {
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null && user.getPhotoUrl() != null) {
-            return user.getPhotoUrl().toString();
-        }
-
-        return null;
-    }
-
 }
 
 

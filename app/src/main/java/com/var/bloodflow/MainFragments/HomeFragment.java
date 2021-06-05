@@ -111,7 +111,6 @@ public class HomeFragment extends Fragment {
                 }
 
         });
-
         return view;
     }
 
@@ -133,6 +132,5 @@ public class HomeFragment extends Fragment {
             }
         }
     }
-
 
 }

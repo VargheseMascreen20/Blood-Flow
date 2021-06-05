@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -48,7 +49,9 @@ public class Login extends AppCompatActivity {
 
 
     GoogleSignInClient mGoogleSignInClient;
-    int counter;
+    private long backPressedTime;
+    private Toast backToast;
+
     private FirebaseAuth.AuthStateListener fAuthListener;
 
     @Override
@@ -65,8 +68,8 @@ public class Login extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mGoogleLoginBtn = findViewById(R.id.googleLoginButton);
 
-        mEmail = findViewById(R.id.Email);
-        mPassword = findViewById(R.id.password);
+        mEmail = findViewById(R.id.email);
+        mPassword = findViewById(R.id.passwd);
         progressBar = findViewById(R.id.progressBar);
         mLoginBtn = findViewById(R.id.loginBtn);
         mCreateBtn = findViewById(R.id.createBtn);
@@ -286,9 +289,16 @@ public class Login extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        counter++;
-        if (counter == 1)
-            super.onBackPressed();
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            backToast.cancel();
+            Login.this.finish();
+            System.exit(0);
+            return;
+        } else {
+            backToast = Toast.makeText(Login.this, "Press Back again to exit", Toast.LENGTH_SHORT);
+            backToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
         finish();
     }
 

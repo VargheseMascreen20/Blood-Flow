@@ -35,7 +35,7 @@ public class Register extends AppCompatActivity {
 
     public static final String TAG = "TAG";
 
-    EditText email, pass, phno, bldgrp, dob, gender, name, city;
+    EditText email, pass, phno, bldgrp, gender, dob, name, city;
     Button register, bck;
     String userID;
 
@@ -52,16 +52,17 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        email = findViewById(R.id.email);
-        pass = findViewById(R.id.pass);
-        phno = findViewById(R.id.phno);
-        name = findViewById(R.id.name);
-        dob = findViewById(R.id.dob);
-        gender = findViewById(R.id.gender);
-        bldgrp = findViewById(R.id.bldGrp);
-        city = findViewById(R.id.city);
+        email = findViewById(R.id.email1);
+        pass = findViewById(R.id.pass1);
+        phno = findViewById(R.id.phno1);
+        name = findViewById(R.id.name1);
+        dob = findViewById(R.id.dob1);
+        gender = findViewById(R.id.gender1);
+        bldgrp = findViewById(R.id.bldGrp1);
+        city = findViewById(R.id.city1);
         fAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("users");
+        System.out.println(email.toString());
         if (fAuth.getCurrentUser() != null) {
             startActivity(new Intent(Register.this, Login.class));
             finish();
@@ -97,7 +98,7 @@ public class Register extends AppCompatActivity {
                 final String gend = gender.getText().toString().trim();
                 final String bloodgrp = bldgrp.getText().toString().trim();
                 final String place = city.getText().toString().trim();
-                final String image = "";
+                final String image = "https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1";
                 if (TextUtils.isEmpty(emailid)) {
                     email.setError("Email is Required");
                     return;
@@ -131,7 +132,7 @@ public class Register extends AppCompatActivity {
                                 Toast.makeText(com.var.bloodflow.Register.this, "User Created.", Toast.LENGTH_SHORT).show();
                                 userID = fAuth.getCurrentUser().getUid();
                                 Users users = new Users(userID, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place);
-                                reference.child(phoneno).setValue(users);
+                                reference.child(userID).setValue(users);
                                 Toast.makeText(com.var.bloodflow.Register.this, "User Created.", Toast.LENGTH_SHORT).show();
 
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -148,7 +149,16 @@ public class Register extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(Register.this, Login.class);
+        startActivity(i);
+        finish();
+    }
 }
+
+
 
 
  /* DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users").child(userID);

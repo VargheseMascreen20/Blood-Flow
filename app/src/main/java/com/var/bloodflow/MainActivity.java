@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
                 } finally {
                     sp = getSharedPreferences("Credentials", Context.MODE_PRIVATE);
                     String name = sp.getString("Name", "");
@@ -55,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         thread.start();
-
-
     }
 
 

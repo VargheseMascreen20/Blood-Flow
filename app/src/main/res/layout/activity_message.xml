@@ -24,6 +24,7 @@
                 android:id="@+id/profile_image"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginRight="10dp"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
@@ -45,49 +46,51 @@
     <RelativeLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="679dp"
+        android:layout_height="727dp"
         android:layout_below="@+id/bar_layout"
         android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="7dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="-6dp"
+        android:layout_marginBottom="0dp"
         android:background="@color/light_grey"
         android:padding="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
-            android:layout_width="384dp"
-            android:layout_height="600dp"
+            android:layout_width="381dp"
+            android:layout_height="657dp"
             android:layout_above="@+id/text_send"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="3dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            android:layout_marginBottom="7dp" />
+            android:layout_marginBottom="6dp" />
 
         <ImageButton
             android:id="@+id/btn_send"
-            android:layout_width="70dp"
-            android:layout_height="51dp"
+            android:layout_width="55dp"
+            android:layout_height="37dp"
             android:layout_below="@+id/recycler_view"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="6dp"
-            android:layout_marginRight="17dp"
-            android:layout_marginBottom="17dp"
+            android:layout_marginRight="11dp"
+            android:layout_marginBottom="22dp"
             android:background="@drawable/ic_send"
-            android:elevation="8dp" />
+            android:elevation="20dp" />
 
         <EditText
             android:id="@+id/text_send"
-            android:layout_width="326dp"
-            android:layout_height="47dp"
+            android:layout_width="327dp"
+            android:layout_height="49dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="11dp"
             android:layout_toLeftOf="@+id/btn_send"
-            android:background="@android:color/white"
+            android:background="@drawable/input_field"
             android:hint="Type a message" />
 
     </RelativeLayout>
