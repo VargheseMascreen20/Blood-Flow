@@ -90,7 +90,7 @@ public class ChatFragment extends Fragment {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Users user = snapshot.getValue(Users.class);
-
+                    assert mUsers != null;
                     // display 1 user from chats
                     for (String id : usersList) {
                         if (user.getUser_id().equals(id)) {
@@ -99,7 +99,6 @@ public class ChatFragment extends Fragment {
                                     if (!user.getUser_id().equals(user1.getUser_id())) {
                                         mUsers.add(user);
                                     }
-
                                 }
                             } else {
                                 mUsers.add(user);

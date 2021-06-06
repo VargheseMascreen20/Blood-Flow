@@ -1,5 +1,6 @@
 package com.var.bloodflow;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -92,6 +93,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Query query = databaseReference.orderByChild("user_id").equalTo(user.getUid());
         query.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -101,9 +103,9 @@ public class ProfileActivity extends AppCompatActivity {
                     String phone = "" + ds.child("phno").getValue();
                     String image = "" + ds.child("image").getValue();
 
-                    nameTv.setText(name);
-                    emailTv.setText(email);
-                    phoneTv.setText(phone);
+                    nameTv.setText("Name : " + name.toUpperCase());
+                    emailTv.setText("Email :" + email.toLowerCase());
+                    phoneTv.setText("Phone : " + phone);
                     try {
                         Picasso.get().load(image).into(avatar);
                     } catch (Exception e) {
