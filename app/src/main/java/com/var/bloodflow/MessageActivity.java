@@ -63,7 +63,6 @@ public class MessageActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
 
@@ -103,8 +102,8 @@ public class MessageActivity extends AppCompatActivity {
                 Users user = dataSnapshot.getValue(Users.class);
                 try {
                     username.setText(user.getName());
-                    if (user.getImage().equals("default")) {
-                        profile_image.setImageResource(R.mipmap.ic_launcher);
+                    if (user.getImage().equals("https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1")) {
+                        Glide.with(MessageActivity.this).load("https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2Fapp_icon.jpeg?alt=media&token=f5a55fdb-d743-4593-a395-ca391cfffd06").placeholder(R.color.black).into(profile_image);
                     } else {
                         Glide.with(MessageActivity.this).load(user.getImage()).into(profile_image);
                     }
@@ -132,6 +131,20 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("message", message);
 
         reference.child("Chats").push().setValue(hashMap);
+//        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist").child(fuser.getUid()).child(fuser.getUid());
+//        chatRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if(!dataSnapshot.exists()){
+//                    chatRef.child("id").setValue(fuser.getUid());
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 
     private void readMessages(String myid, String userid, String imageurl) {
@@ -160,4 +173,22 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
     }
+//    private void status(String status){
+//        reference = FirebaseDatabase.getInstance().getReference("users").child(fuser.getUid());
+//        HashMap <String , Object> hashMap = new HashMap<>();
+//        hashMap.put("status",status);
+//        reference.updateChildren(hashMap);
+//    }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        status("online");
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        status("offline");
+//    }
 }

@@ -194,7 +194,8 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                 final String password = "";
                                 final String image = "https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1";
                                 final String city = "";
-                                Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, city);
+                                final String status = "offline";
+                                Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, city, status);
                                 reference.child(userid).setValue(users);
                                 Intent i = new Intent(VerifyOTPActivity.this, GetInfo.class);
                                 startActivity(i);

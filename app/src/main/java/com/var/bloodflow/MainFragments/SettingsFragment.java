@@ -135,7 +135,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                         editor.remove("phone");
                         editor.putInt("Log in Status", 1);
                         editor.apply();
-                        Intent intent = new Intent(getContext(), Login.class);
+                        Intent intent = new Intent(getContext(), Login.class);//.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(intent);
                         getActivity().finish();
                     }

@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/donors_layout"
     tools:context=".DonorsList">
 
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="308dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="246dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/chelseamarket"
         android:text="DONORS LIST"
         android:textColor="@color/black"
         android:textSize="36sp"
@@ -20,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/message_Btn"
         android:layout_width="34dp"
         android:layout_height="32dp"
@@ -38,15 +40,26 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/donors_list"
-        android:layout_width="408dp"
-        android:layout_height="601dp"
+        android:layout_width="395dp"
+        android:layout_height="457dp"
         android:layout_marginVertical="60dp"
         android:layout_marginTop="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/textView14"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="@+id/textView14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.307" />
+        app:layout_constraintVertical_bias="0.849" />
+
+    <TextView
+        android:id="@+id/resText"
+        android:layout_width="280dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/chelseamarket"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

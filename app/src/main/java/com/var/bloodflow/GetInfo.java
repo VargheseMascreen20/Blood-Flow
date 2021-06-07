@@ -72,8 +72,9 @@ public class GetInfo extends AppCompatActivity {
         final String bloodgrp = "";
         final String password = "";
         final String image = "";
+        final String status = "offline";
         databaseReference = firebaseDatabase.getReference("users").child(id);
-        Users user = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place);
+        Users user = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place, status);
         databaseReference.setValue(user);
     }
 

@@ -16,6 +16,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="128dp"
         android:layout_marginEnd="32dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
         android:hint="Enter your Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -26,6 +28,7 @@
         <EditText
             android:id="@+id/name"
             android:layout_width="match_parent"
+            android:fontFamily="@font/chelseamarket"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,6 +50,7 @@
             <EditText
                 android:id="@+id/bloodgroup"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/chelseamarket"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -58,6 +62,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="36dp"
             android:layout_marginEnd="32dp"
+            app:counterMaxLength="11"
             android:hint="Enter your DOB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -68,28 +73,33 @@
             <EditText
                 android:id="@+id/d_o_b"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/chelseamarket"
+                android:maxLength="11"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/il_4"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="32dp"
-            android:hint="Enter your City"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/il_3"
-            tools:ignore="MissingConstraints">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/il_4"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Enter your City"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/il_3"
+        tools:ignore="MissingConstraints">
 
-            <EditText
-                android:id="@+id/city"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/chelseamarket"
+            android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -97,6 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
+        android:fontFamily="@font/chelseamarket"
         android:background="@drawable/submit"
         android:text="continue"
         app:layout_constraintEnd_toEndOf="parent"

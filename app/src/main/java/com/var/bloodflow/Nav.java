@@ -63,31 +63,10 @@ public class Nav extends AppCompatActivity {
             return false;
         }
     };
-    int count;
-    private long backPressedTime;
-    //    private void checkUserStatus(){
-//        FirebaseUser user = fAuth.getCurrentUser();
-//        if (user != null)
-//        {
-//
-//        }
-//        else{
-//            startActivity(new Intent(Launch.this,Login.class));
-//        }
-//
-//    }
-//
-//    @Override
-//    protected void onStart() {
-//        checkUserStatus();
-//        super.onStart();
-//    }
-    private Toast backToast;
 
     private void setUpLandingFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack();
-
         HomeFragment fragment1 = new HomeFragment();
         FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
         ft1.replace(R.id.fragment_container, fragment1, "");
@@ -109,15 +88,6 @@ public class Nav extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-//        if (backPressedTime + 2000 > System.currentTimeMillis()){
-//            backToast.cancel();
-//            return;
-//        }else {
-//            backToast = Toast.makeText(getBaseContext(),"Press Back again to exit",Toast.LENGTH_SHORT);
-//            backToast.show();
-//        }
-//        backPressedTime = System.currentTimeMillis();
-//        finish();
-    }
 
+    }
 }

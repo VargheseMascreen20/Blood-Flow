@@ -1,13 +1,19 @@
 package com.var.bloodflow;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,31 +21,72 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.var.bloodflow.Adapters.DonorsAdapter;
+import com.var.bloodflow.MainFragments.HomeFragment;
+import com.var.bloodflow.MainFragments.MessagingFragment;
 import com.var.bloodflow.ModelClasses.Users;
 
 import java.util.ArrayList;
 
 public class DonorsList extends AppCompatActivity {
-    Button messageBtn;
-    private RecyclerView donors_list;
+
+    String bloodGroup, city;
+    TextView resultText;
+    ImageButton messageButton;
+
     private ArrayList<Users> list;
     private RecyclerView recyclerView;
     private DatabaseReference reference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donors_list);
-        Button messageBtn = findViewById(R.id.message_Btn);
+        messageButton = findViewById(R.id.message_Btn);
 //        Intent messageActivity = new Intent(DonorsList.Message.class);
 //        startActivity(Message.class);
+
+        bloodGroup = getIntent().getExtras().getString("blood group");
+        city = getIntent().getExtras().getString("City");
+        resultText = findViewById(R.id.resText);
         reference = FirebaseDatabase.getInstance().getReference().child("users");
         reference.keepSynced(true);
 
-        donors_list = (RecyclerView) findViewById(R.id.donors_list);
-        donors_list.setHasFixedSize(true);
-        donors_list.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = findViewById(R.id.donors_list);
+//        donors_list = (RecyclerView) findViewById(R.id.donors_list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        resultText.setText("You are viewing the result for " + bloodGroup + " blood donors in " + city + " city.");
 
+        messageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                MessagingFragment fragment = new MessagingFragment();
+                fragmentTransaction.replace(R.id.donors_layout, fragment, "");
+                fragmentTransaction.commit();
+            }
+        });
+
+    }
+
+    public void search(String bloodGroup, String city) {
+        ArrayList<Users> myList = new ArrayList<>();
+        for (Users object : list) {
+            if (object.getBldgrp().toLowerCase().equals(bloodGroup.toLowerCase())
+                    && (object.getPlace().toLowerCase().equals(city.toLowerCase())
+            )) {
+                myList.add(object);
+            }
+        }
+
+        if (myList.isEmpty()) {
+            myList.clear();
+            Toast.makeText(DonorsList.this, "Unfortunately we have no " + bloodGroup + " blood donors in " + city + " city.", Toast.LENGTH_LONG).show();
+        }
+        DonorsAdapter adapterClass = new DonorsAdapter(myList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(adapterClass);
     }
 
     public void onStart() {
@@ -54,28 +101,15 @@ public class DonorsList extends AppCompatActivity {
                             list.add(ds.getValue(Users.class));
                         }
                         DonorsAdapter adapterClass = new DonorsAdapter(list);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(DonorsList.this));
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(adapterClass);
+                        search(bloodGroup, city);
                     }
-//                    if (searchView != null) {
-//                        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//                            @Override
-//                            public boolean onQueryTextSubmit(String s) {
-//                                return false;
-//                            }
-//
-//                            @Override
-//                            public boolean onQueryTextChange(String s) {
-//                                search(s);
-//                                return true;
-//                            }
-//                        });
-//                    }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(DonorsList.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
                 }
             });
         }

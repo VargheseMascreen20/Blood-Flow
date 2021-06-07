@@ -22,13 +22,13 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="263dp"
-        android:layout_height="91dp"
+        android:layout_width="257dp"
+        android:layout_height="79dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="84dp"
         android:layout_marginTop="76dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/chelseamarket"
         android:text="My Requests"
         android:textColor="@color/black"
         android:textSize="36sp"

@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.var.bloodflow.Adapters.RequestAdapter;
 import com.var.bloodflow.MakeRequest;
 import com.var.bloodflow.ModelClasses.MakeRequestModel;
+import com.var.bloodflow.MyRequests;
 import com.var.bloodflow.R;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class RequestsFragment extends Fragment {
     private RecyclerView recyclerView;
     private SearchView searchView;
     private FloatingActionButton fabAdd;
-
+    private FloatingActionButton fab_my_requests;
     public RequestsFragment() {
     }
 
@@ -51,6 +52,14 @@ public class RequestsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), MakeRequest.class);
+                startActivity(i);
+            }
+        });
+        fab_my_requests = view.findViewById(R.id.fab_my_requests);
+        fab_my_requests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), MyRequests.class);
                 startActivity(i);
             }
         });

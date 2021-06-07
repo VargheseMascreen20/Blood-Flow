@@ -234,7 +234,8 @@ public class Login extends AppCompatActivity {
                                 final String bloodgrp = "";
                                 final String password = "";
                                 final String image = getUserPhotoUrl();
-                                Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place);
+                                final String status = "offline";
+                                Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place, status);
                                 reference.child(userid).setValue(users);
 
                             }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,8 +36,11 @@ public class HomeFragment extends Fragment {
 
     Button maps, find;
     TextView txt, blood_group;
-    int PLACE_PICKER_REQUEST = 1;
+    //    int PLACE_PICKER_REQUEST = 1;
     Spinner spinner;
+    String bloodgroup;
+
+    EditText city;
 
 
     @Override
@@ -46,10 +50,10 @@ public class HomeFragment extends Fragment {
 
         txt = view.findViewById(R.id.txt);
         blood_group = view.findViewById(R.id.blood_group);
+        city = view.findViewById(R.id.city);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.blood_groups, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        
         spinner = view.findViewById(R.id.spinner);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -77,6 +81,9 @@ public class HomeFragment extends Fragment {
                 } else {
                     key = 0;
                 }
+
+                bloodgroup = Item;
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -85,52 +92,59 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        maps = view.findViewById(R.id.maps);
-        maps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-                try {
-                    startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
-
-                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
 
         find = view.findViewById(R.id.find);
         find.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String start = txt.getText().toString().trim();
-                String stop = blood_group.getText().toString().trim();
+                final String sCity = city.getText().toString().trim();
+//                String start = txt.getText().toString().trim();
+//                String stop = blood_group.getText().toString().trim();
+//                txt.setText(sCity);
+
                 Intent intent = new Intent(getActivity(), DonorsList.class);
-                    startActivity(intent);
-                }
+                intent.putExtra("blood group", bloodgroup);
+                intent.putExtra("City", sCity);
+                startActivity(intent);
+            }
 
         });
+
+//        maps = view.findViewById(R.id.maps);
+//        maps.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+//                try {
+//                    startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+//
+//                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        });
+
         return view;
     }
 
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == PLACE_PICKER_REQUEST) {
-            if (resultCode == Activity.RESULT_OK) {
-                Place place = PlacePicker.getPlace(data, getActivity());
-                StringBuilder stringBuilder = new StringBuilder();
-                String latitude = String.valueOf(place.getLatLng().latitude);
-                String longitude = String.valueOf(place.getLatLng().longitude);
-                stringBuilder.append("LATITUDE :");
-                stringBuilder.append(latitude);
-                stringBuilder.append("\n");
-                stringBuilder.append("LONGITUDE :");
-                stringBuilder.append(longitude);
-                txt.setText(stringBuilder.toString());
-            }
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        if (requestCode == PLACE_PICKER_REQUEST) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                Place place = PlacePicker.getPlace(data, getActivity());
+//                StringBuilder stringBuilder = new StringBuilder();
+//                String latitude = String.valueOf(place.getLatLng().latitude);
+//                String longitude = String.valueOf(place.getLatLng().longitude);
+//                stringBuilder.append("LATITUDE :");
+//                stringBuilder.append(latitude);
+//                stringBuilder.append("\n");
+//                stringBuilder.append("LONGITUDE :");
+//                stringBuilder.append(longitude);
+//                txt.setText(stringBuilder.toString());
+//            }
+//        }
+//    }
 
 }

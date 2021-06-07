@@ -99,6 +99,7 @@ public class Register extends AppCompatActivity {
                 final String bloodgrp = bldgrp.getText().toString().trim();
                 final String place = city.getText().toString().trim();
                 final String image = "https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1";
+                final String status = "offline";
                 if (TextUtils.isEmpty(emailid)) {
                     email.setError("Email is Required");
                     return;
@@ -131,7 +132,7 @@ public class Register extends AppCompatActivity {
 
                                 Toast.makeText(com.var.bloodflow.Register.this, "User Created.", Toast.LENGTH_SHORT).show();
                                 userID = fAuth.getCurrentUser().getUid();
-                                Users users = new Users(userID, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place);
+                                Users users = new Users(userID, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place, status);
                                 reference.child(userID).setValue(users);
                                 Toast.makeText(com.var.bloodflow.Register.this, "User Created.", Toast.LENGTH_SHORT).show();
 

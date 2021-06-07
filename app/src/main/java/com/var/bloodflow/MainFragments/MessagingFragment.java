@@ -13,13 +13,19 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.var.bloodflow.Fragments.ChatFragment;
 import com.var.bloodflow.Fragments.UsersFragment;
 import com.var.bloodflow.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MessagingFragment extends Fragment {
+
     TabLayout tabLayout;
     ViewPager viewPager;
 
@@ -73,4 +79,23 @@ public class MessagingFragment extends Fragment {
 
         }
     }
+////    private void status(String status){
+////        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+////        reference = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.getUid());
+////        HashMap <String , Object> hashMap = new HashMap<>();
+////        hashMap.put("status",status);
+////        reference.updateChildren(hashMap);
+////    }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        status("online");
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        status("offline");
+//    }
 }

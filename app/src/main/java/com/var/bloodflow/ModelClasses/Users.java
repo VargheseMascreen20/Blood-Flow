@@ -4,9 +4,9 @@ import android.os.Parcel;
 
 public class Users {
 
-    private String user_id, name, uname, dob, phno, bldgrp, gender, password, image, place;
+    private String user_id, name, uname, dob, phno, bldgrp, gender, password, image, place, status;
 
-    public Users(String user_id, String name, String uname, String dob, String phno, String bldgrp, String gender, String password, String image, String place) {
+    public Users(String user_id, String name, String uname, String dob, String phno, String bldgrp, String gender, String password, String image, String place, String status) {
         this.user_id = user_id;
         this.name = name;
         this.uname = uname;
@@ -17,6 +17,7 @@ public class Users {
         this.password = password;
         this.image = image;
         this.place = place;
+        this.status = status;
     }
 
 
@@ -113,5 +114,13 @@ public class Users {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
