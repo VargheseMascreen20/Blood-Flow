@@ -145,6 +145,8 @@
         <EditText
             android:id="@+id/passwd"
             android:layout_width="match_parent"
+            android:maxLength="20"
+            android:maxLines="1"
             android:layout_height="wrap_content"
             android:fontFamily="@font/chelseamarket"
             android:inputType="textPassword" />
@@ -173,6 +175,9 @@
 
         <EditText
             android:id="@+id/email"
+            android:inputType="textEmailAddress"
+            android:maxLength="40"
+            android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/chelseamarket" />

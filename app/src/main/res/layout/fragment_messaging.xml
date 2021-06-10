@@ -9,22 +9,26 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/light_grey"
         android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:accessibilityPaneTitle="Messages"
             android:labelFor="@+id/Messages"
             android:tag="Messages">
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/red"
-                app:title="Messages"
-                app:titleTextColor="@color/white"></androidx.appcompat.widget.Toolbar>
+                android:elevation="5dp"
+                app:title="MESSAGES"
+                app:titleMarginStart="140dp"
+                app:titleTextColor="@color/white">
+
+            </androidx.appcompat.widget.Toolbar>
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"

@@ -47,34 +47,66 @@ public class GetInfo extends AppCompatActivity {
         assert user != null;
         id = user.getUid();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        int flag = getIntent().getExtras().getInt("FLAG");
+        if (flag == 0) {
+            name.setText(user.getDisplayName().toUpperCase());
+            go1st = findViewById(R.id.go1st);
+            go1st.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(GetInfo.this, Nav.class);
+                    startActivity(i);
+                    updateGoogleUser();
+                }
+            });
+        } else {
+            go1st = findViewById(R.id.go1st);
+            go1st.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(GetInfo.this, Nav.class);
+                    startActivity(i);
+                    updateUser();
+                }
+            });
+        }
 
 
-        go1st = findViewById(R.id.go1st);
-        go1st.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(GetInfo.this, Nav.class);
-                startActivity(i);
-                updateUser();
-            }
-        });
+    }
+
+    private void updateGoogleUser() {
+        final String userid = id;
+        final String fname = name.getText().toString().trim();
+        final String emailid = user.getEmail();
+        final String phoneno = "";
+        final String place = city.getText().toString().trim();
+        final String dateOB = dob.getText().toString().trim();
+        final String gend = "";
+        final String bldgrp = bloodgrp.getText().toString().trim();
+        final String password = "";
+        final String image = user.getPhotoUrl().toString();
+        final String status = "offline";
+        databaseReference = firebaseDatabase.getReference("users").child(id);
+        Users user = new Users(userid, fname, emailid, dateOB, phoneno, bldgrp, gend, password, image, place, status);
+        databaseReference.setValue(user);
 
     }
 
     private void updateUser() {
         final String userid = id;
         final String fname = name.getText().toString().trim();
-        final String emailid = "";
-        final String phoneno = user.getPhoneNumber();
+        final String emailid = "set your email";
+        final String phoneno = getIntent().getExtras().getString("PHONE");
         final String place = city.getText().toString().trim();
         final String dateOB = dob.getText().toString().trim();
         final String gend = "";
-        final String bloodgrp = "";
+        final String bldgrp = bloodgrp.getText().toString().trim();
+
         final String password = "";
-        final String image = "";
+        final String image = "https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1";
         final String status = "offline";
         databaseReference = firebaseDatabase.getReference("users").child(id);
-        Users user = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place, status);
+        Users user = new Users(userid, fname, emailid, dateOB, phoneno, bldgrp, gend, password, image, place, status);
         databaseReference.setValue(user);
     }
 

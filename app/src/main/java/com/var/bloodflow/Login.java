@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AlertDialogLayout;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -99,6 +100,10 @@ public class Login extends AppCompatActivity {
                     mEmail.setError("Email is Required.");
                     return;
                 }
+                if (email.length() >= 40) {
+                    mPassword.setError("Email Must be <= 40 Characters");
+                    return;
+                }
 
                 if (TextUtils.isEmpty(password)) {
                     mPassword.setError("Password is Required.");
@@ -107,6 +112,10 @@ public class Login extends AppCompatActivity {
 
                 if (password.length() < 6) {
                     mPassword.setError("Password Must be >= 6 Characters");
+                    return;
+                }
+                if (password.length() >= 20) {
+                    mPassword.setError("Password Must be <= 20 Characters");
                     return;
                 }
 
@@ -145,6 +154,7 @@ public class Login extends AppCompatActivity {
 
                 final EditText resetMail = new EditText(v.getContext());
                 final AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+
                 passwordResetDialog.setTitle("Reset Password ?");
                 passwordResetDialog.setMessage("Enter Your Email To Received Reset Link.");
                 passwordResetDialog.setView(resetMail);
@@ -237,7 +247,10 @@ public class Login extends AppCompatActivity {
                                 final String status = "offline";
                                 Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, place, status);
                                 reference.child(userid).setValue(users);
-
+                                int flag = 0;
+                                Intent getInfo = new Intent(Login.this, GetInfo.class);
+                                getInfo.putExtra("FLAG", flag);
+                                startActivity(getInfo);
                             }
 
                         } else {

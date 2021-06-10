@@ -5,9 +5,17 @@ import android.os.Parcelable;
 
 public class MakeRequestModel {
 
-    private String patientName, hospitaltName, blood_group, required_units, op_number, date, city;
+    private String user_id;
+    private String patientName;
+    private String hospitaltName;
+    private String blood_group;
+    private String required_units;
+    private String op_number;
+    private String date;
+    private String city;
 
-    public MakeRequestModel(String patientName, String hospitaltName, String blood_group, String required_units, String op_number, String date, String city) {
+    public MakeRequestModel(String user_id, String patientName, String hospitaltName, String blood_group, String required_units, String op_number, String date, String city) {
+        this.user_id = user_id;
         this.patientName = patientName;
         this.hospitaltName = hospitaltName;
         this.blood_group = blood_group;
@@ -19,6 +27,15 @@ public class MakeRequestModel {
 
     public MakeRequestModel() {
 
+    }
+
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getPatientName() {

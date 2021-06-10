@@ -15,32 +15,49 @@
 
     <!--button for verifying user OTP-->
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/idEdtPhoneNumber"
-        android:layout_width="330dp"
-        android:layout_height="66dp"
-
-        android:layout_marginTop="144dp"
-
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="34dp"
+        android:gravity="center"
         android:hint="Enter your phone"
-        android:importantForAutofill="no"
-        android:inputType="phone"
+        app:counterMaxLength="10"
+        app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:prefixText="+91"
+        app:prefixTextColor="@color/red"
+        app:startIconDrawable="@drawable/ic_phone">
+
+        <EditText
+            android:id="@+id/idEdtPhoneNumber1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/chelseamarket"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:maxLength="10" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/idBtnGetOtp"
         android:layout_width="339dp"
         android:layout_height="74dp"
         android:layout_below="@id/idEdtPhoneNumber"
-
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/submit"
+        android:fontFamily="@font/chelseamarket"
+        android:gravity="center"
+        android:textSize="16dp"
         android:text="Get OTP"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idEdtPhoneNumber" />
 
@@ -52,37 +69,56 @@
         android:layout_weight="2.5"
         android:autoSizeTextType="uniform"
         android:textColor="#CCCCCC"
+        android:fontFamily="@font/chelseamarket"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.737"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idBtnGetOtp" />
 
-    <EditText
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/idEdtOtp"
-        android:layout_width="352dp"
-        android:layout_height="72dp"
-        android:layout_below="@id/idBtnGetOtp"
-
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="72dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
         android:hint="Enter OTP"
-        android:importantForAutofill="no"
-        android:inputType="phone"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="36dp"
+        android:gravity="center"
+        app:counterMaxLength="10"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idBtnGetOtp" />
+        app:layout_constraintTop_toBottomOf="@+id/countTime">
+
+        <EditText
+            android:id="@+id/idEdtOtp1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idBtnGetOtp"
+            android:fontFamily="@font/chelseamarket"
+            android:importantForAutofill="no"
+            android:inputType="phone" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/idBtnVerify"
         android:layout_width="339dp"
         android:layout_height="70dp"
-
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/submit"
+        android:fontFamily="@font/chelseamarket"
         android:text="Verify OTP"
         android:textAllCaps="false"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idEdtOtp" />
-    " />
-
+        app:layout_constraintTop_toBottomOf="@+id/idEdtOtp"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

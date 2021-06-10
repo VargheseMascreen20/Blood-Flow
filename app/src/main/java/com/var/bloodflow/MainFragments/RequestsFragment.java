@@ -46,6 +46,8 @@ public class RequestsFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.req_list);
         searchView = view.findViewById(R.id.searchView);
+        searchView.onActionViewExpanded();
+
 
         fabAdd = view.findViewById(R.id.fab_add);
         fabAdd.setOnClickListener(new View.OnClickListener() {

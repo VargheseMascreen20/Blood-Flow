@@ -25,7 +25,6 @@ import static com.var.bloodflow.R.id.nav_settings;
 
 public class Nav extends AppCompatActivity {
     private final BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case nav_home:

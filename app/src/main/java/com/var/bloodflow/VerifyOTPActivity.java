@@ -30,16 +30,14 @@ import java.util.concurrent.TimeUnit;
 
 public class VerifyOTPActivity extends AppCompatActivity {
 
+    private static long mTimeLeftInMillis = 120000;
     // variable for FirebaseAuth class
     private FirebaseAuth mAuth;
-
     private DatabaseReference reference;
     // variable for our text input
     // field for phone and OTP.
     private EditText edtPhone, edtOTP;
     private TextView countTime;
-    private static long mTimeLeftInMillis = 120000;
-
     // buttons for generating OTP and verifying OTP
     private Button verifyOTPBtn, generateOTPBtn;
 
@@ -110,11 +108,11 @@ public class VerifyOTPActivity extends AppCompatActivity {
 
 
         // initializing variables for button and Edittext.
-        edtPhone = findViewById(R.id.idEdtPhoneNumber);
-        edtOTP = findViewById(R.id.idEdtOtp);
+        edtPhone = findViewById(R.id.idEdtPhoneNumber1);
+        edtOTP = findViewById(R.id.idEdtOtp1);
         verifyOTPBtn = findViewById(R.id.idBtnVerify);
         generateOTPBtn = findViewById(R.id.idBtnGetOtp);
-        countTime=findViewById(R.id.countTime);
+        countTime = findViewById(R.id.countTime);
 
         // setting onclick listner for generate OTP button.
         generateOTPBtn.setOnClickListener(new View.OnClickListener() {
@@ -132,16 +130,18 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     String phone = "+91" + edtPhone.getText().toString();
                     sendVerificationCode(phone);
                     countTime.setVisibility(View.VISIBLE);
-                    new CountDownTimer(120000,1000) {
+                    countTime.clearComposingText();
+                    new CountDownTimer(120000, 1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
                             mTimeLeftInMillis = millisUntilFinished;
                             updateCountDownText();
                         }
+
                         @Override
                         public void onFinish() {
                             countTime.setText("TimeOut");
-
+                            countTime.setVisibility(View.INVISIBLE);
                         }
                     }.start();
                 }
@@ -161,7 +161,12 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 } else {
                     // if OTP field is not empty calling
                     // method to verify the OTP.
-                    verifyCode(edtOTP.getText().toString());
+                    try {
+                        verifyCode(edtOTP.getText().toString());
+                    } catch (Exception e) {
+                        Toast.makeText(VerifyOTPActivity.this, "INCORRECT OTP", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
                 }
             }
         });
@@ -192,12 +197,15 @@ public class VerifyOTPActivity extends AppCompatActivity {
                                 final String gend = "";
                                 final String bloodgrp = "";
                                 final String password = "";
-                                final String image = "https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1";
+                                final String image = "";
                                 final String city = "";
                                 final String status = "offline";
                                 Users users = new Users(userid, fname, emailid, dateOB, phoneno, bloodgrp, gend, password, image, city, status);
                                 reference.child(userid).setValue(users);
                                 Intent i = new Intent(VerifyOTPActivity.this, GetInfo.class);
+                                int flag = 1;
+                                i.putExtra("FLAG", flag);
+                                i.putExtra("PHONE", phoneno);
                                 startActivity(i);
                             }
 
@@ -210,10 +218,11 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     }
                 });
     }
-    public void updateCountDownText(){
-        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+
+    public void updateCountDownText() {
+//        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
-        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
+        String timeLeftFormatted = String.format(Locale.getDefault(), "%02d", seconds);
         countTime.setText(timeLeftFormatted);
 
     }
@@ -239,11 +248,11 @@ public class VerifyOTPActivity extends AppCompatActivity {
     private void verifyCode(String code) {
         // below line is used for getting getting
         // credentials from our verification id and code.
+
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
 
         // after getting credential we are
         // calling sign in method.
         signInWithCredential(credential);
-        finish();
     }
 }

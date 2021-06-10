@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.var.bloodflow">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -18,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Blood"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Map" />
         <activity android:name=".GetInfo" />
         <activity android:name=".ErrorPage" />
         <activity android:name=".MessageActivity" />
@@ -26,6 +28,7 @@
         <activity android:name=".MakeRequest" />
         <activity android:name=".DonorsList" />
         <activity android:name=".MainActivity2" />
+
 
         <meta-data
             android:name="com.google.gms.vision"

@@ -1,6 +1,7 @@
 package com.var.bloodflow;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 public class DonorsList extends AppCompatActivity {
 
     String bloodGroup, city;
-    TextView resultText;
+    TextView resultText, moreResult, moreResultText;
     ImageButton messageButton;
 
     private ArrayList<Users> list;
@@ -45,6 +46,8 @@ public class DonorsList extends AppCompatActivity {
         messageButton = findViewById(R.id.message_Btn);
 //        Intent messageActivity = new Intent(DonorsList.Message.class);
 //        startActivity(Message.class);
+        moreResult = findViewById(R.id.moreResults);
+        moreResultText = findViewById(R.id.moreResultsText);
 
         bloodGroup = getIntent().getExtras().getString("blood group");
         city = getIntent().getExtras().getString("City");
@@ -83,6 +86,21 @@ public class DonorsList extends AppCompatActivity {
         if (myList.isEmpty()) {
             myList.clear();
             Toast.makeText(DonorsList.this, "Unfortunately we have no " + bloodGroup + " blood donors in " + city + " city.", Toast.LENGTH_LONG).show();
+            moreResultText.setVisibility(View.VISIBLE);
+            moreResultText.setEnabled(true);
+            moreResult.setVisibility(View.VISIBLE);
+            moreResult.setEnabled(true);
+            moreResult.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int flag = 2;
+                    Intent i = new Intent(DonorsList.this, Map.class);
+                    i.putExtra("City", city);
+                    i.putExtra("FLAG", flag);
+                    startActivity(i);
+                }
+            });
+
         }
         DonorsAdapter adapterClass = new DonorsAdapter(myList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

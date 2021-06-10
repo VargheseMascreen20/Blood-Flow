@@ -75,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
+                android:fontFamily="@font/chelseamarket"
                 android:text="name:"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
@@ -84,6 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/chelseamarket"
                 android:text="email:"
                 android:textColor="@color/black"></TextView>
 
@@ -92,6 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/chelseamarket"
                 android:text="phone:"
                 android:textColor="@color/black"></TextView>
 

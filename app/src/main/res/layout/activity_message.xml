@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
+                android:fontFamily="@font/chelseamarket"
                 android:layout_toEndOf="@id/profile_image"
                 android:layout_toRightOf="@id/profile_image"
                 android:text="Username"
@@ -55,6 +56,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginBottom="0dp"
         android:background="@color/light_grey"
+
         android:padding="5dp">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -88,6 +90,7 @@
             android:layout_height="49dp"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="3dp"
+            android:fontFamily="@font/chelseamarket"
             android:layout_marginBottom="11dp"
             android:layout_toLeftOf="@+id/btn_send"
             android:background="@drawable/input_field"

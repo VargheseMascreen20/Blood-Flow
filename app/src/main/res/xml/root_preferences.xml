@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:allowDividerAbove="true">
     <PreferenceCategory android:title="Settings">
         <Preference
             android:icon="@drawable/acc"
@@ -10,6 +13,7 @@
             <!--                android:targetClass="com.var.bloodflow.fragments.SettingsFragment.class"-->
             <!--                android:targetPackage="com.var.bloodflow.fragments" />-->
             <!--        </Preference>-->
+
         </Preference>
     </PreferenceCategory>
     <Preference
@@ -39,7 +43,7 @@
         <intent
             android:id="@+id/help_intent"
             android:action="android.intent.action.VIEW"
-            android:data="https://www.google.com/search?q=blood+flow+app&amp;oq=blood+flow+app&amp;aqs=chrome..69i57j69i60l3.7128j0j1&amp;sourceid=chrome&amp;ie=UTF-8" />
+            android:data="https://twitter.com/TheBloodFlowAp1?s=08" />
     </Preference>
 
     <!--    </Preference>-->
@@ -58,9 +62,9 @@
         android:key="delete_key"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Delete Account"/>
+        android:title="Delete Account" />
     <Preference
         android:icon="@drawable/logout"
         android:key="log_out_key"
-        android:title="Log Out"/>
+        android:title="Log Out" />
 </PreferenceScreen>
