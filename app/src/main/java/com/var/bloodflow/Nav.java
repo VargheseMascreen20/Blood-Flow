@@ -80,10 +80,7 @@ public class Nav extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(nav_home, new HomeFragment()).addToBackStack(null).commit();
         setUpLandingFragment();
-
-
 //        fAuth = FirebaseAuth.getInstance();
-
     }
 
     public void onBackPressed() {

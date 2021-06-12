@@ -158,7 +158,6 @@ public class Login extends AppCompatActivity {
                 passwordResetDialog.setTitle("Reset Password ?");
                 passwordResetDialog.setMessage("Enter Your Email To Received Reset Link.");
                 passwordResetDialog.setView(resetMail);
-
                 passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -195,7 +194,6 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, RC_SIGN_IN);
-
             }
         });
 
@@ -251,6 +249,7 @@ public class Login extends AppCompatActivity {
                                 Intent getInfo = new Intent(Login.this, GetInfo.class);
                                 getInfo.putExtra("FLAG", flag);
                                 startActivity(getInfo);
+                                finish();
                             }
 
                         } else {

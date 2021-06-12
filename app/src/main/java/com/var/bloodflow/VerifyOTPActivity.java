@@ -120,6 +120,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // below line is for checking weather the user
                 // has entered his mobile number or not.
+                generateOTPBtn.setEnabled(false);
                 if (TextUtils.isEmpty(edtPhone.getText().toString())) {
                     // when mobile number text field is empty
                     // displaying a toast message.

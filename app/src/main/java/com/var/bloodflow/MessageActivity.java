@@ -50,6 +50,7 @@ public class MessageActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     Intent intent;
+    ValueEventListener seenListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +88,7 @@ public class MessageActivity extends AppCompatActivity {
                 if (!msg.equals("")) {
                     sendMessage(fuser.getUid(), userid, msg);
                 } else {
-                    Toast.makeText(MessageActivity.this, "You can't send empty message", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "You can't send empty message", Toast.LENGTH_SHORT).show();
                 }
                 text_send.setText("");
             }
@@ -103,20 +104,43 @@ public class MessageActivity extends AppCompatActivity {
                 try {
                     username.setText(user.getName());
                     if (user.getImage().equals("https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1")) {
-                        Glide.with(MessageActivity.this).load("https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2Fapp_icon.jpeg?alt=media&token=f5a55fdb-d743-4593-a395-ca391cfffd06").placeholder(R.color.black).into(profile_image);
+                        Glide.with(getApplicationContext()).load("https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2Fapp_icon.jpeg?alt=media&token=f5a55fdb-d743-4593-a395-ca391cfffd06").placeholder(R.color.black).into(profile_image);
                     } else {
-                        Glide.with(MessageActivity.this).load(user.getImage()).into(profile_image);
+                        Glide.with(getApplicationContext()).load(user.getImage()).into(profile_image);
                     }
                     readMessages(fuser.getUid(), userid, user.getImage());
                 } catch (Exception e) {
-                    Toast.makeText(MessageActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(MessageActivity.this, ErrorPage.class);
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(getApplicationContext(), ErrorPage.class);
                     startActivity(i);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        seenMessage(userid);
+    }
+
+    private void seenMessage(String userid) {
+        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        seenListener = reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Chat chat = snapshot.getValue(Chat.class);
+                    if (chat.getReceiver().equals(fuser.getUid()) && chat.getSender().equals(userid)) {
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("isseen", "seen");
+                        snapshot.getRef().updateChildren(hashMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
@@ -129,6 +153,7 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
+        hashMap.put("isseen", "Delivered");
 
         reference.child("Chats").push().setValue(hashMap);
 //        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist").child(fuser.getUid()).child(fuser.getUid());
@@ -162,7 +187,7 @@ public class MessageActivity extends AppCompatActivity {
                             chat.getReceiver() != null && chat.getReceiver().equals(userid) && chat.getSender().equals(myid)) {
                         mChat.add(chat);
                     }
-                    messageAdapter = new MessageAdapter(MessageActivity.this, mChat, imageurl);
+                    messageAdapter = new MessageAdapter(getApplicationContext(), mChat, imageurl);
                     recyclerView.setAdapter(messageAdapter);
                 }
             }
@@ -173,7 +198,15 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
     }
-//    private void status(String status){
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        reference.removeEventListener(seenListener);
+
+    }
+//        private void status(String status){
 //        reference = FirebaseDatabase.getInstance().getReference("users").child(fuser.getUid());
 //        HashMap <String , Object> hashMap = new HashMap<>();
 //        hashMap.put("status",status);
@@ -189,6 +222,7 @@ public class MessageActivity extends AppCompatActivity {
 //    @Override
 //    public void onPause() {
 //        super.onPause();
+//        reference.removeEventListener(seenListener);
 //        status("offline");
 //    }
 }

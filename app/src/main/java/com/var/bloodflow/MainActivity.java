@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     sleep(2000);
+                    finish();
 
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -29,9 +29,9 @@ public class MakeRequest extends AppCompatActivity {
 
     FirebaseAuth fAuth;
     DatabaseReference reference;
-    List<MakeRequestModel> makeRequestModelList;
     List<String> op_no_list;
-
+    //    long maxId=0;
+    MakeRequestModel makeRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,10 +46,24 @@ public class MakeRequest extends AppCompatActivity {
         req_date = findViewById(R.id.req_date);
         op_no_list = new ArrayList<>();
 
+        makeRequest = new MakeRequestModel();
+
         fAuth = FirebaseAuth.getInstance();
         reference = FirebaseDatabase.getInstance().getReference("request");
-
-
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if (snapshot.exists()){
+//                    maxId = (snapshot.getChildrenCount());
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
         post_req = findViewById(R.id.post_req);
         post_req.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,6 +117,8 @@ public class MakeRequest extends AppCompatActivity {
     private void makeRequest(String userId, String patientName, String hospitaltName, String blood_group, String required_units, String op_number, String date, String city) {
         MakeRequestModel request = new MakeRequestModel(userId, patientName, hospitaltName, blood_group, required_units, op_number, date, city);
         reference.child(op_number).setValue(request);
+//        reference.child(String.valueOf(maxId+1)).setValue(request);
+
         finish();
         MakeRequest.super.onBackPressed();
     }

@@ -1,12 +1,14 @@
 package com.var.bloodflow.Adapters;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.var.bloodflow.ModelClasses.MakeRequestModel;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHolder> {
     ArrayList<MakeRequestModel> list;
+
 
     public RequestAdapter(ArrayList<MakeRequestModel> list) {
         this.list = list;
@@ -54,6 +57,32 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
             hospt = itemView.findViewById(R.id.hospital);
             units = itemView.findViewById(R.id.units);
             place = itemView.findViewById(R.id.place);
+
+            itemView.findViewById(R.id.acceptBtn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(itemView.getContext());
+                    builder.setTitle("Accept Request");
+                    builder.setMessage("Are you Sure you want to accept the request");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+//                          Intent intent = new Intent(getContext(), Login.class);
+//                          startActivity(intent);
+//                          getActivity().finish();
+                        }
+                    });
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+            });
         }
+
     }
 }
