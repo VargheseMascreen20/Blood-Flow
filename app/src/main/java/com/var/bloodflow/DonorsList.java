@@ -102,7 +102,7 @@ public class DonorsList extends AppCompatActivity {
             });
 
         }
-        DonorsAdapter adapterClass = new DonorsAdapter(myList);
+        DonorsAdapter adapterClass = new DonorsAdapter(myList, getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(adapterClass);
     }
@@ -118,7 +118,7 @@ public class DonorsList extends AppCompatActivity {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             list.add(ds.getValue(Users.class));
                         }
-                        DonorsAdapter adapterClass = new DonorsAdapter(list);
+                        DonorsAdapter adapterClass = new DonorsAdapter(list, getApplicationContext());
                         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerView.setAdapter(adapterClass);
                         search(bloodGroup, city);

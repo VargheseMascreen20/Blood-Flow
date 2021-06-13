@@ -26,8 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try {
                     sleep(2000);
-                    finish();
-
+//                    finish();
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();

@@ -6,14 +6,27 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/findBloodDrives"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/chelseamarket"
+        android:text="FIND BLOOD DRIVES"
+        android:textColor="@color/red"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="28dp"
         android:fontFamily="@font/chelseamarket"
-        android:text="Blood Requests"
+        android:layout_marginTop="60dp"
+        android:text="BLOOD REQUESTS"
         android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,35 +34,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/subtxt"
+        android:layout_width="363dp"
+        android:layout_height="44dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/chelseamarket"
+        android:gravity="center_horizontal"
+        android:text="Find Blood Requests by passing in name, blood group, hospital name or city."
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView12" />
+
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="352dp"
         android:layout_height="56dp"
-        android:layout_marginTop="12dp"
-        android:elevation="100dp"
+        android:layout_marginTop="5dp"
         android:focusable="true"
-        android:keepScreenOn="true"
-        android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/req_list"
+        android:elevation="6dp"
+        android:focusedByDefault="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/subtxt"
         app:queryHint="Search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/req_list"
         android:layout_width="390dp"
         android:layout_height="502dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="@+id/searchView"
         app:layout_constraintStart_toStartOf="@+id/searchView"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="0.503">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/searchView"></androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"

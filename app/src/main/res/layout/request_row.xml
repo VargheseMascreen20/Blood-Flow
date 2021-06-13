@@ -10,11 +10,12 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="320dp"
-        android:layout_height="200dp"
+        android:layout_height="218dp"
         android:layout_marginTop="10dp"
         android:elevation="200dp"
         android:orientation="vertical"
         app:cardCornerRadius="20dp"
+        app:cardBackgroundColor="@color/light_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +24,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/light_blue"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -87,22 +87,62 @@
 
             </TextView>
 
+            <TextView
+                android:id="@+id/reqDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="1dp"
+                android:fontFamily="@font/chelseamarket"
+                android:text="Date :"
+                android:textAlignment="center"
+                android:textColor="@color/black">
+
+            </TextView>
+
+            <!--            <Button-->
+            <!--                android:id="@+id/acceptBtn"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="40dp"-->
+            <!--                android:layout_gravity="bottom|center"-->
+            <!--                android:layout_marginStart="50dp"-->
+            <!--                android:layout_marginTop="5dp"-->
+            <!--                android:layout_marginEnd="50dp"-->
+            <!--                android:layout_marginBottom="50dp"-->
+            <!--                android:fontFamily="@font/chelseamarket"-->
+            <!--                android:gravity="center"-->
+            <!--                android:text="accept">-->
+
+            <!--            </Button>-->
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <Button
                 android:id="@+id/acceptBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_gravity="bottom|center"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
                 android:fontFamily="@font/chelseamarket"
                 android:gravity="center"
-                android:text="accept">
+                android:text="accept"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            </Button>
+            <ImageButton
+                android:id="@+id/msgBtn"
+                android:layout_width="40dp"
+                android:layout_height="38dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/ic_message"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/acceptBtn"
+                app:layout_constraintHorizontal_bias="0.93"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        </LinearLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

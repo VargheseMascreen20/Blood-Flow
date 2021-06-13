@@ -137,57 +137,6 @@ public class ChatFragment extends Fragment {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Users user = snapshot.getValue(Users.class);
-//
-//
-//                    // display 1 user from chats
-//                    for (String id : usersList) {
-//                        assert user != null;
-//                        if (user.getUser_id().equals(id)) {
-//                            boolean duplicateFound = false;
-//                            for (Users user1 : mUsers) {
-//                                if (user.getUser_id().equals(user1.getUser_id())) {
-//                                    mUsers.add(user);
-//                                    duplicateFound = true;
-//                                }
-//                            }
-//
-//                            if (!duplicateFound) {
-//                                mUsers.add(user);
-//                            }
-//
-//
-////                    // display 1 user from chats
-////                    for (String id : usersList) {
-////                        if (user.getUser_id().equals(id)) {
-////                            if (mUsers.size() != 0) {
-////                                ListIterator<Users> listIteratorUser = mUsers.listIterator();
-////                                while(listIteratorUser.hasNext()){
-////                                    Users user1 = listIteratorUser.next();
-////                                    if (!user.getUser_id().equals(user1.getUser_id())){
-////                                        listIteratorUser.add(user);
-////
-////                                    }
-////                                }
-////                            }else {
-////                                mUsers.add(user);
-//                        }
-//                    }
-//                }
-//
-//                userAdapter = new UserAdapter(getContext(), mUsers);
-//                recyclerView.setAdapter(userAdapter);
-//                userAdapter.notifyDataSetChanged();
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
-//}
                     for (String id : usersList) {
                         assert user != null;
                         if (user.getUser_id().equals(id)) {
@@ -211,7 +160,6 @@ public class ChatFragment extends Fragment {
                 userAdapter = new UserAdapter(getContext(), mUsers);
                 recyclerView.setAdapter(userAdapter);
                 userAdapter.notifyDataSetChanged();
-
 
             }
 

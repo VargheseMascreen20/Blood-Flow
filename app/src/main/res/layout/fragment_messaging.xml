@@ -22,7 +22,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/red"
+                android:background="@color/Dark_red"
                 android:elevation="5dp"
                 app:title="MESSAGES"
                 app:titleMarginStart="140dp"
@@ -34,7 +34,7 @@
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/light_red"
+                android:background="@color/Dark_red2"
                 app:tabIndicatorColor="@color/white"
                 app:tabSelectedTextColor="@color/white"
                 tools:ignore="MissingConstraints" />

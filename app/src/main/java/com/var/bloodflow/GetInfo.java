@@ -101,7 +101,6 @@ public class GetInfo extends AppCompatActivity {
         final String dateOB = dob.getText().toString().trim();
         final String gend = "";
         final String bldgrp = bloodgrp.getText().toString().trim();
-
         final String password = "";
         final String image = "https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1";
         final String status = "offline";

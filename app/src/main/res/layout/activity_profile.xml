@@ -45,7 +45,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_edit_white"
+        android:src="@drawable/ic_edit_blk"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -60,7 +60,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="121dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="25dp"
             android:layout_marginRight="3dp"
@@ -76,17 +76,29 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:fontFamily="@font/chelseamarket"
-                android:text="name:"
+                android:text="Name : "
                 android:textColor="@color/black"
                 android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/bloodTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+
+                android:fontFamily="@font/chelseamarket"
+                android:text="Blood Group : "
+                android:textColor="@color/black"></TextView>
 
             <TextView
                 android:id="@+id/emailTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/chelseamarket"
-                android:text="email:"
+                android:text="Email : "
                 android:textColor="@color/black"></TextView>
 
             <TextView
@@ -94,8 +106,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+
                 android:fontFamily="@font/chelseamarket"
-                android:text="phone:"
+                android:text="Phone : "
+                android:textColor="@color/black"></TextView>
+
+            <TextView
+                android:id="@+id/placeTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="25dp"
+                android:fontFamily="@font/chelseamarket"
+                android:text="City : "
                 android:textColor="@color/black"></TextView>
 
         </LinearLayout>

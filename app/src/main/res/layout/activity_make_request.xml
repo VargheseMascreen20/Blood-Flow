@@ -15,7 +15,7 @@
         tools:ignore="RedundantNamespace">
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/title1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="34dp"
@@ -31,7 +31,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/hospt"
@@ -252,7 +251,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15">
+            app:layout_constraintTop_toBottomOf="@+id/title1">
 
             <EditText
                 android:id="@+id/patient_name"
@@ -264,5 +263,16 @@
                 android:maxLines="1"
                 android:textColor="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/deleteBtn"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/ic_delete"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

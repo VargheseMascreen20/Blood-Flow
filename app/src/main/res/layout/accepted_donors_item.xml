@@ -58,16 +58,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2" />
 
-
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/profile_image"
-        android:fontFamily="@font/chelseamarket"
         android:layout_toRightOf="@id/profile_image"
-        android:textSize="18sp"
+        android:fontFamily="@font/chelseamarket"
         android:text="Username"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.099"
@@ -75,6 +74,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.45"
         app:layout_goneMarginStart="6dp" />
+
+    <Button
+        android:id="@+id/recievedBlood"
+        android:layout_width="86dp"
+        android:layout_height="36dp"
+        android:background="@drawable/submit"
+        android:fontFamily="@font/chelseamarket"
+        android:text="Recieved"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintStart_toEndOf="@+id/username"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466" />
 
     <View
         android:id="@+id/view"

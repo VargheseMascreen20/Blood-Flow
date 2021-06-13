@@ -13,29 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 import com.var.bloodflow.MessageActivity;
-import com.var.bloodflow.ModelClasses.Chat;
 import com.var.bloodflow.ModelClasses.Users;
 import com.var.bloodflow.R;
 
 import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class AcceptedDonorsAdapter extends RecyclerView.Adapter<AcceptedDonorsAdapter.ViewHolder> {
 
     String theLastMesssage;
     private Context mContext;
     private List<Users> mUsers;
 //    private boolean isChat;
 
-    public UserAdapter(Context mContext, List<Users> mUsers) {//boolean isChat
+    public AcceptedDonorsAdapter(Context mContext, List<Users> mUsers) {//boolean isChat
         this.mUsers = mUsers;
         this.mContext = mContext;
 //        this.isChat = isChat;
@@ -44,14 +35,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.user_item, parent, false);
-        return new UserAdapter.ViewHolder(view);
+    public AcceptedDonorsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.accepted_donors_item, parent, false);
+        return new AcceptedDonorsAdapter.ViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AcceptedDonorsAdapter.ViewHolder holder, int position) {
         Users user = mUsers.get(position);
         String img = "https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1";
         holder.username.setText(user.getName() + " (" + user.getBldgrp() + ")");

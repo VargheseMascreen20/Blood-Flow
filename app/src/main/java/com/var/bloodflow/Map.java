@@ -29,7 +29,7 @@ public class Map extends AppCompatActivity {
             lon = getIntent().getExtras().getString("Lontd");
 //        url= "https://www.eraktkosh.in/BLDAHIMS/bloodbank/stockAvailability.cnt";
 //        url = "https://www.social-searcher.com/google-social-search/?q=blood+donors+kochi&fb=on";
-            url = "https://www.google.com/maps/search/blood+donors+near+me/@" + lat + "," + lon + ",12.13z";
+            url = "https://www.google.com/maps/search/blood+banks+near+me/@" + lat + "," + lon + ",12.13z";
             mywebView.loadUrl(url);
             //"https://www.google.com/maps/dir///"
             //https://www.google.com/search?tbs=lf:1,lf_ui:2&tbm=lcl&sxsrf=ALeKk029u99ZT1noBW6eau9WZbWAej4ugA:1623167753673&q=blood+donations+near+me&rflfq=1&num=10&sa=X&ved=2ahUKEwiJ7fiKs4jxAhWBXisKHXgkAn4QjGp6BAgQEEE&biw=1536&bih=758&dpr=1.25#rlfi=hd:;si:;mv:[[10.862584026176384,78.25198313671876],[9.234563353411698,75.18679758984376],null,[10.049598423883234,76.71939036328126],9]
@@ -43,6 +43,11 @@ public class Map extends AppCompatActivity {
         } else if (flag == 2) {
             String city = getIntent().getExtras().getString("City");
             url = "https://www.helpingera.in/search/a%252B/" + city + "/";
+            mywebView.loadUrl(url);
+            WebSettings webSettings = mywebView.getSettings();
+            webSettings.setJavaScriptEnabled(true);
+        } else if (flag == 3) {
+            url = "https://www.eraktkosh.in/BLDAHIMS/bloodbank/campSchedule.cnt";
             mywebView.loadUrl(url);
             WebSettings webSettings = mywebView.getSettings();
             webSettings.setJavaScriptEnabled(true);

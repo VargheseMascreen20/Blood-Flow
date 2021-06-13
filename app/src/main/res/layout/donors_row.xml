@@ -67,39 +67,18 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="75dp"
-            android:layout_height="40dp"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="bottom|center"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginStart="96dp"
-            android:text="Send Request"
-            android:textSize="8sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button"
-            app:layout_constraintHorizontal_bias="0.762"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="SmallSp">
-
-        </Button>
-
-        <Button
-            android:id="@+id/button"
+            android:id="@+id/messageBtn"
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="false"
             android:layout_alignParentBottom="false"
             android:layout_gravity="bottom|right"
-            android:layout_marginEnd="96dp"
             android:layout_marginBottom="16dp"
             android:text="Message"
             android:textSize="7sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             app:layout_constraintVertical_bias="0.0">
 

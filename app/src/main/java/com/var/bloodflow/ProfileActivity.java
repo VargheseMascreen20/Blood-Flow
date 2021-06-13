@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
     String storagePath = "Users_Profile_Cover_Imgs/";
 
     ImageView avatar;
-    TextView nameTv, emailTv, phoneTv;
+    TextView nameTv, emailTv, phoneTv, bloodTv, placeTv;
     FloatingActionButton fab;
     ProgressDialog pd;
 
@@ -83,6 +83,8 @@ public class ProfileActivity extends AppCompatActivity {
         nameTv = findViewById(R.id.nameTv);
         emailTv = findViewById(R.id.emailTv);
         phoneTv = findViewById(R.id.phoneTv);
+        bloodTv = findViewById(R.id.bloodTv);
+        placeTv = findViewById(R.id.placeTv);
         fab = findViewById(R.id.fab);
 
         pd = new ProgressDialog(ProfileActivity.this);
@@ -101,11 +103,15 @@ public class ProfileActivity extends AppCompatActivity {
                     String name = "" + ds.child("name").getValue();
                     String email = "" + ds.child("uname").getValue();
                     String phone = "" + ds.child("phno").getValue();
+                    String blood = "" + ds.child("bldgrp").getValue();
+                    String place = "" + ds.child("place").getValue();
                     String image = "" + ds.child("image").getValue();
 
                     nameTv.setText("Name : " + name.toUpperCase());
                     emailTv.setText("Email :" + email.toLowerCase());
                     phoneTv.setText("Phone : " + phone);
+                    bloodTv.setText("Blood Group : " + blood);
+                    placeTv.setText("City : " + place);
                     try {
                         Picasso.get().load(image).into(avatar);
                     } catch (Exception e) {
@@ -154,7 +160,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     private void showEditProfileDialog() {
-        String[] options = {"Edit Profile Picture", "Edit Name", "Edit Phone Number"};
+        String[] options = {"Edit Profile Picture", "Edit Name", "Edit Phone Number", "Edit City", "Edit Blood Group"};
         AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
         builder.setTitle("Choose Action To Edit");
         builder.setItems(options, new DialogInterface.OnClickListener() {
@@ -170,6 +176,12 @@ public class ProfileActivity extends AppCompatActivity {
                 } else if (which == 2) {
                     pd.setMessage("Updating Phone Number");
                     showNamePhoneUpdateDialog("phno");
+                } else if (which == 3) {
+                    pd.setMessage("Updating City");
+                    showNamePhoneUpdateDialog("place");
+                } else if (which == 4) {
+                    pd.setMessage("Updating blood group");
+                    showNamePhoneUpdateDialog("bldgrp");
                 }
             }
         });

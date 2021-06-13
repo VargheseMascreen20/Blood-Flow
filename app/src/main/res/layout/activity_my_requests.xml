@@ -23,10 +23,10 @@
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
-        android:layout_height="79dp"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="56dp"
         android:gravity="center"
         android:fontFamily="@font/chelseamarket"
         android:text="My Requests"
@@ -38,15 +38,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myRequests"
-        android:layout_width="357dp"
-        android:layout_height="542dp"
+        android:layout_width="350dp"
+        android:layout_height="575dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
