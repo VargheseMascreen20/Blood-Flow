@@ -131,7 +131,6 @@ public class VerifyOTPActivity extends AppCompatActivity {
                     String phone = "+91" + edtPhone.getText().toString();
                     sendVerificationCode(phone);
                     countTime.setVisibility(View.VISIBLE);
-                    countTime.clearComposingText();
                     new CountDownTimer(120000, 1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {

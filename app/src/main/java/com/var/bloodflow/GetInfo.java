@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,8 +55,6 @@ public class GetInfo extends AppCompatActivity {
             go1st.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(GetInfo.this, Nav.class);
-                    startActivity(i);
                     updateGoogleUser();
                 }
             });
@@ -64,8 +63,6 @@ public class GetInfo extends AppCompatActivity {
             go1st.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(GetInfo.this, Nav.class);
-                    startActivity(i);
                     updateUser();
                 }
             });
@@ -86,9 +83,29 @@ public class GetInfo extends AppCompatActivity {
         final String password = "";
         final String image = user.getPhotoUrl().toString();
         final String status = "offline";
+        if (TextUtils.isEmpty(fname)) {
+            name.setError("Name is Required");
+            return;
+        }
+        if (TextUtils.isEmpty(bldgrp)) {
+            bloodgrp.setError("dob is Required");
+            return;
+        }
+        if (TextUtils.isEmpty(dateOB)) {
+            dob.setError("Place is Required");
+            return;
+        }
+        if (TextUtils.isEmpty(place)) {
+            city.setError("dob is Required");
+            return;
+        }
+
+
         databaseReference = firebaseDatabase.getReference("users").child(id);
         Users user = new Users(userid, fname, emailid, dateOB, phoneno, bldgrp, gend, password, image, place, status);
         databaseReference.setValue(user);
+        Intent i = new Intent(GetInfo.this, Nav.class);
+        startActivity(i);
 
     }
 
@@ -104,9 +121,27 @@ public class GetInfo extends AppCompatActivity {
         final String password = "";
         final String image = "https://firebasestorage.googleapis.com/v0/b/blood-flow-c80bc.appspot.com/o/image%2FUsers_Profile_Cover_Imgs%2FLogoMakr-4q1rZ1.png?alt=media&token=5bb4f49a-eb7c-48b3-99dc-a2590aab42a1";
         final String status = "offline";
+        if (TextUtils.isEmpty(fname)) {
+            name.setError("Name is Required");
+            return;
+        }
+        if (TextUtils.isEmpty(bldgrp)) {
+            bloodgrp.setError("dob is Required");
+            return;
+        }
+        if (TextUtils.isEmpty(dateOB)) {
+            dob.setError("Place is Required");
+            return;
+        }
+        if (TextUtils.isEmpty(place)) {
+            city.setError("dob is Required");
+            return;
+        }
         databaseReference = firebaseDatabase.getReference("users").child(id);
         Users user = new Users(userid, fname, emailid, dateOB, phoneno, bldgrp, gend, password, image, place, status);
         databaseReference.setValue(user);
+        Intent i = new Intent(GetInfo.this, Nav.class);
+        startActivity(i);
     }
 
     @Override

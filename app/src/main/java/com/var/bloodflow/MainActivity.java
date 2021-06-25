@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(activity_main);
-
         Thread thread = new Thread() {
             public void run() {
 
@@ -51,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "idk ", Toast.LENGTH_SHORT).show();
                         finish();
                     }
-
                 }
             }
         };

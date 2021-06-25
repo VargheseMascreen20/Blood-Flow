@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,7 +62,7 @@ public class AcceptedRequestsAdapter extends RecyclerView.Adapter<AcceptedReques
         myViewHolder.complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                myViewHolder.toast.show();
             }
 
         });
@@ -82,8 +83,9 @@ public class AcceptedRequestsAdapter extends RecyclerView.Adapter<AcceptedReques
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name, blodGrp, hospt, units, place, reqDate;
-        Button complete;
+        Button complete, tick;
         ImageButton msgBtn;
+        Toast toast;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -96,6 +98,7 @@ public class AcceptedRequestsAdapter extends RecyclerView.Adapter<AcceptedReques
             complete = itemView.findViewById(R.id.acceptBtn);
             complete.setText("COMPLETED");
             msgBtn = itemView.findViewById(R.id.msgBtn);
+            toast = Toast.makeText(context, "Please wait for the requester to mark complete", Toast.LENGTH_SHORT);
 
 
 //            itemView.findViewById(R.id.acceptBtn).setOnClickListener(new View.OnClickListener() {

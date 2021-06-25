@@ -78,7 +78,6 @@ public class MakeRequest extends AppCompatActivity {
             usr_op_no.setText(opNumber);
             usr_city.setText(city);
             req_date.setText(reqDate);
-
             deleteBtn.setVisibility(View.VISIBLE);
             deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

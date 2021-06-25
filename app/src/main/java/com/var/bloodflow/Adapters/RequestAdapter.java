@@ -107,7 +107,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (!snapshot.exists()) {
                             AcceptedRequestsModel acceptedRequestsModel1 = new AcceptedRequestsModel(opNumber, donorID, recieverID,
-                                    patientName, hosptName, bloodGroup, units, place, reqDate);
+                                    patientName, hosptName, bloodGroup, units, reqDate, place);
                             reference.child(String.valueOf(maxid + 1)).setValue(acceptedRequestsModel1);
                             myViewHolder.toast.show();
                         } else {

@@ -28,7 +28,6 @@
         <activity android:name=".MyRequests" />
         <activity android:name=".MakeRequest" />
         <activity android:name=".DonorsList" />
-        <activity android:name=".MainActivity2" />
 
         <meta-data
             android:name="com.google.gms.vision"
